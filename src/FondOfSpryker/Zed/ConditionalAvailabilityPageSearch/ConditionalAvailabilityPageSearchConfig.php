@@ -2,7 +2,6 @@
 
 namespace FondOfSpryker\Zed\ConditionalAvailabilityPageSearch;
 
-use Pyz\Zed\Synchronization\SynchronizationConfig;
 use Spryker\Zed\Kernel\AbstractBundleConfig;
 
 class ConditionalAvailabilityPageSearchConfig extends AbstractBundleConfig
@@ -12,8 +11,6 @@ class ConditionalAvailabilityPageSearchConfig extends AbstractBundleConfig
      */
     public function getConditionalAvailabilityPeriodSynchronizationPoolName(): ?string
     {
-        return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
-
         return null;
     }
 

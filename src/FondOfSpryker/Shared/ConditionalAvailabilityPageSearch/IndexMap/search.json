@@ -1,0 +1,22 @@
+{
+  "mappings": {
+    "page": {
+      "properties": {
+        "sku": {
+          "type": "keyword",
+          "include_in_all": false
+        },
+        "start-at": {
+          "type": "date",
+          "format": "yyyy-MM-dd HH:mm:ss",
+          "include_in_all": false
+        },
+        "end-at": {
+          "type": "date",
+          "format": "yyyy-MM-dd HH:mm:ss",
+          "include_in_all": false
+        }
+      }
+    }
+  }
+}

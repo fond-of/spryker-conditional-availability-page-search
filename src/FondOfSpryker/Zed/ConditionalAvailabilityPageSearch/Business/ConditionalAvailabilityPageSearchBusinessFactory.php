@@ -18,6 +18,7 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
  * @method \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchConfig getConfig()
  * @method \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchEntityManagerInterface getEntityManager()
  * @method \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchQueryContainerInterface getQueryContainer()
+ * @method \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchRepositoryInterface getRepository()
  */
 class ConditionalAvailabilityPageSearchBusinessFactory extends AbstractBusinessFactory
 {
@@ -49,7 +50,8 @@ class ConditionalAvailabilityPageSearchBusinessFactory extends AbstractBusinessF
     protected function createConditionalAvailabilityPeriodPageSearchExpander(): ConditionalAvailabilityPeriodPageSearchExpanderInterface
     {
         return new ConditionalAvailabilityPeriodPageSearchExpander(
-            $this->getStoreFacade()
+            $this->getStoreFacade(),
+            $this->getConditionalAvailabilityPeriodPageDataExpanderPlugins()
         );
     }
 
@@ -81,5 +83,15 @@ class ConditionalAvailabilityPageSearchBusinessFactory extends AbstractBusinessF
     protected function getUtilEncodingService(): ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface
     {
         return $this->getProvidedDependency(ConditionalAvailabilityPageSearchDependencyProvider::SERVICE_UTIL_ENCODING);
+    }
+
+    /**
+     * @throws
+     *
+     * @return \FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface[]
+     */
+    protected function getConditionalAvailabilityPeriodPageDataExpanderPlugins(): array
+    {
+        return $this->getProvidedDependency(ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_DATA_EXPANDER);
     }
 }

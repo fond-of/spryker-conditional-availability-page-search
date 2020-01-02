@@ -15,11 +15,20 @@ class ConditionalAvailabilityPeriodPageSearchExpander implements ConditionalAvai
     protected $storeFacade;
 
     /**
-     * @param \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface $storeFacade
+     * @var \FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface[]
      */
-    public function __construct(ConditionalAvailabilityPageSearchToStoreFacadeInterface $storeFacade)
-    {
+    protected $conditionalAvailabilityPeriodPageDataExpanderPlugins;
+
+    /**
+     * @param \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface $storeFacade
+     * @param \FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface[] $conditionalAvailabilityPeriodPageDataExpanderPlugins
+     */
+    public function __construct(
+        ConditionalAvailabilityPageSearchToStoreFacadeInterface $storeFacade,
+        array $conditionalAvailabilityPeriodPageDataExpanderPlugins
+    ) {
         $this->storeFacade = $storeFacade;
+        $this->conditionalAvailabilityPeriodPageDataExpanderPlugins = $conditionalAvailabilityPeriodPageDataExpanderPlugins;
     }
 
     public function expand(
@@ -32,6 +41,11 @@ class ConditionalAvailabilityPeriodPageSearchExpander implements ConditionalAvai
         $conditionalAvailabilityPeriodPageSearchTransfer = $this->expandWithStoreName(
             $conditionalAvailabilityPeriodPageSearchTransfer
         );
+
+        foreach ($this->conditionalAvailabilityPeriodPageDataExpanderPlugins as $conditionalAvailabilityPeriodPageDataExpanderPlugin) {
+            $conditionalAvailabilityPeriodPageSearchTransfer = $conditionalAvailabilityPeriodPageDataExpanderPlugin
+                ->expand($conditionalAvailabilityPeriodPageSearchTransfer);
+        }
 
         return $conditionalAvailabilityPeriodPageSearchTransfer;
     }

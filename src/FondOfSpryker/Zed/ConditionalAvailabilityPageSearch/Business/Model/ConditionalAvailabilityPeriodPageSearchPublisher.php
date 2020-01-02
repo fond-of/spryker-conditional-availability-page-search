@@ -67,8 +67,9 @@ class ConditionalAvailabilityPeriodPageSearchPublisher implements ConditionalAva
     public function publish(array $conditionalAvailabilityIds): void
     {
         $fosConditionalAvailabilityPeriodEntities = $this->queryContainer
-            ->queryConditionalAvailabilityPeriodsByConditionalAvailabilityIds($conditionalAvailabilityIds)
-            ->find()
+            ->queryConditionalAvailabilityPeriodsWithConditionalAvailabilityAndProductByConditionalAvailabilityIds(
+                $conditionalAvailabilityIds
+            )->find()
             ->getData();
 
         if (count($fosConditionalAvailabilityPeriodEntities) > 0) {
@@ -99,17 +100,18 @@ class ConditionalAvailabilityPeriodPageSearchPublisher implements ConditionalAva
      */
     protected function storeDataSet(FosConditionalAvailabilityPeriod $fosConditionalAvailabilityPeriodEntity): void
     {
+        $conditionalAvailabilityPeriodData = $fosConditionalAvailabilityPeriodEntity->toArray();
+
         $conditionalAvailabilityPeriodPageSearchTransfer = (new ConditionalAvailabilityPeriodPageSearchTransfer())
-            ->fromArray($fosConditionalAvailabilityPeriodEntity->toArray(), true);
+            ->fromArray($conditionalAvailabilityPeriodData, true)
+            ->setData($conditionalAvailabilityPeriodData);
 
         $conditionalAvailabilityPeriodPageSearchTransfer = $this->conditionalAvailabilityPeriodPageSearchExpander
             ->expand($conditionalAvailabilityPeriodPageSearchTransfer);
 
-        $structuredData = $fosConditionalAvailabilityPeriodEntity->toArray();
-        $data = $this->mapStructuredDataTohData($structuredData);
-
-        $conditionalAvailabilityPeriodPageSearchTransfer->setData($data)
-            ->setStructuredData($this->utilEncodingService->encodeJson($structuredData));
+         $conditionalAvailabilityPeriodPageSearchTransfer = $this->addDataAttributes(
+             $conditionalAvailabilityPeriodPageSearchTransfer
+         );
 
         $this->entityManager->createConditionalAvailabilityPeriodPageSearch(
             $conditionalAvailabilityPeriodPageSearchTransfer
@@ -117,16 +119,27 @@ class ConditionalAvailabilityPeriodPageSearchPublisher implements ConditionalAva
     }
 
     /**
-     * @param array $structuredData
+     * @param \Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransfer
      *
-     * @return array
+     * @return \Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer
      */
-    protected function mapStructuredDataTohData(array $structuredData): array
-    {
-        return $this->searchFacade->transformPageMapToDocumentByMapperName(
-            $structuredData,
+    protected function addDataAttributes(
+        ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransfer
+    ): ConditionalAvailabilityPeriodPageSearchTransfer {
+        $data = array_merge(
+            $conditionalAvailabilityPeriodPageSearchTransfer->toArray(),
+            $conditionalAvailabilityPeriodPageSearchTransfer->getData()
+        );
+
+        $data = $this->searchFacade->transformPageMapToDocumentByMapperName(
+            $data,
             new LocaleTransfer(),
             ConditionalAvailabilityPageSearchConstants::CONDITIONAL_AVAILABILITY_PERIOD_RESOURCE_NAME
         );
+
+        $structuredData = $this->utilEncodingService->encodeJson($data);
+
+        return $conditionalAvailabilityPeriodPageSearchTransfer->setData($data)
+            ->setStructuredData($structuredData);
     }
 }

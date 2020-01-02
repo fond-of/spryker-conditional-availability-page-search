@@ -5,6 +5,9 @@
 
     <transfer name="PageMap">
         <property name="sku" type="string" />
+        <property name="quantity" type="string" />
+        <property name="warehouseGroup" type="string" />
+        <property name="isAccessible" type="bool" />
         <property name="startAt" type="string" />
         <property name="endAt" type="string" />
     </transfer>

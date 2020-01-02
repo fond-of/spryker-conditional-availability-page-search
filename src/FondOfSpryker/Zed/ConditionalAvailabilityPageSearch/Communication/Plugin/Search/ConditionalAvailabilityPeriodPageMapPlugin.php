@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Communication\Plugin\Search;
 
+use DateTime;
 use FondOfSpryker\Shared\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchConstants;
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer;
 use Generated\Shared\Transfer\LocaleTransfer;
@@ -47,6 +48,8 @@ class ConditionalAvailabilityPeriodPageMapPlugin extends AbstractPlugin implemen
      * @param array $data
      * @param \Generated\Shared\Transfer\LocaleTransfer $locale
      *
+     * @throws
+     *
      * @return \Generated\Shared\Transfer\PageMapTransfer
      */
     public function buildPageMap(PageMapBuilderInterface $pageMapBuilder, array $data, LocaleTransfer $locale): PageMapTransfer
@@ -63,8 +66,8 @@ class ConditionalAvailabilityPeriodPageMapPlugin extends AbstractPlugin implemen
             ->setType(static::TYPE_CONDITIONAL_AVAILABILITY_PERIOD)
             ->setIsActive(true)
             ->setSku($data[static::DATA_KEY_SKU])
-            ->setStartAt($data[static::DATA_KEY_START_AT])
-            ->setEndAt($data[static::DATA_KEY_END_AT]);
+            ->setStartAt((new DateTime($data[static::DATA_KEY_START_AT]))->format('Y-m-d H:i:s'))
+            ->setEndAt((new DateTime($data[static::DATA_KEY_END_AT]))->format('Y-m-d H:i:s'));
 
         $pageMapBuilder->addSearchResultData($pageMapTransfer, static::KEY_SKU, $data[static::DATA_KEY_SKU])
             ->addSearchResultData($pageMapTransfer, static::KEY_QUANTITY, $data[static::DATA_KEY_QUANTITY])

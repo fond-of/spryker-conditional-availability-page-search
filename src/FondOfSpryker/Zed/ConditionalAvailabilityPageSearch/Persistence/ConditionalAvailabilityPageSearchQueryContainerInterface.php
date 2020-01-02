@@ -12,6 +12,15 @@ interface ConditionalAvailabilityPageSearchQueryContainerInterface
      *
      * @return \Orm\Zed\ConditionalAvailability\Persistence\FosConditionalAvailabilityPeriodQuery
      */
+    public function queryConditionalAvailabilityPeriodsWithConditionalAvailabilityAndProductByConditionalAvailabilityIds(
+        array $conditionalAvailabilityIds
+    ): FosConditionalAvailabilityPeriodQuery;
+
+    /**
+     * @param int[] $conditionalAvailabilityIds
+     *
+     * @return \Orm\Zed\ConditionalAvailability\Persistence\FosConditionalAvailabilityPeriodQuery
+     */
     public function queryConditionalAvailabilityPeriodsByConditionalAvailabilityIds(
         array $conditionalAvailabilityIds
     ): FosConditionalAvailabilityPeriodQuery;

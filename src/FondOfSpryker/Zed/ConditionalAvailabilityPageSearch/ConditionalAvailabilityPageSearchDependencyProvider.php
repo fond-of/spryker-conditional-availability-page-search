@@ -17,11 +17,13 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
     public const FACADE_SEARCH = 'FACADE_SEARCH';
     public const FACADE_STORE = 'FACADE_STORE';
 
+    public const PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_MAP_EXPANDER = 'PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_MAP_EXPANDER';
+    public const PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_DATA_EXPANDER = 'PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_DATA_EXPANDER';
+
     public const PROPEL_QUERY_CONDITIONAL_AVAILABILITY_PERIOD = 'PROPEL_QUERY_CONDITIONAL_AVAILABILITY_PERIOD';
     public const PROPEL_QUERY_CONDITIONAL_AVAILABILITY = 'PROPEL_QUERY_CONDITIONAL_AVAILABILITY';
 
     public const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
-    public const PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_MAP_EXPANDER = 'PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_MAP_EXPANDER';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -32,6 +34,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
     {
         $container = parent::provideBusinessLayerDependencies($container);
 
+        $container = $this->addConditionalAvailabilityPeriodPageDataExpanderPlugins($container);
         $container = $this->addStoreFacade($container);
         $container = $this->addSearchFacade($container);
         $container = $this->addUtilEncodingService($container);
@@ -49,8 +52,8 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
         $container = parent::provideCommunicationLayerDependencies($container);
 
         $container = $this->addConditionalAvailabilityPeriodPageMapExpanderPlugins($container);
-        $container = $this->addStoreFacade($container);
         $container = $this->addEventBehaviorFacade($container);
+        $container = $this->addStoreFacade($container);
 
         return $container;
     }
@@ -184,5 +187,29 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
         };
 
         return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addConditionalAvailabilityPeriodPageDataExpanderPlugins(Container $container): Container
+    {
+        $self = $this;
+
+        $container[static::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_DATA_EXPANDER] = static function () use ($self) {
+            return $self->getConditionalAvailabilityPeriodPageDataExpanderPlugins();
+        };
+
+        return $container;
+    }
+
+    /**
+     * @return \FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface[]
+     */
+    protected function getConditionalAvailabilityPeriodPageDataExpanderPlugins(): array
+    {
+        return [];
     }
 }

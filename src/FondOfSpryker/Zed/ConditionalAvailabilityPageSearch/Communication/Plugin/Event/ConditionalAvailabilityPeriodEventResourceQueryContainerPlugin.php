@@ -48,6 +48,6 @@ class ConditionalAvailabilityPeriodEventResourceQueryContainerPlugin extends Abs
      */
     public function queryData(array $ids = []): ?ModelCriteria
     {
-        return $this->getQueryContainer()->queryConditionalAvailabilitiesByConditionalAvailabilityIds($ids);
+        return $this->getQueryContainer()->queryConditionalAvailabilityPeriodsByConditionalAvailabilityIds($ids);
     }
 }

@@ -23,12 +23,10 @@ class ConditionalAvailabilityPageSearchQueryContainer extends AbstractQueryConta
      *
      * @return \Orm\Zed\ConditionalAvailability\Persistence\FosConditionalAvailabilityPeriodQuery
      */
-    public function queryConditionalAvailabilityPeriodsByConditionalAvailabilityIds(
+    public function queryConditionalAvailabilityPeriodsWithConditionalAvailabilityAndProductByConditionalAvailabilityIds(
         array $conditionalAvailabilityIds
     ): FosConditionalAvailabilityPeriodQuery {
-        $fosConditionalAvailabilityPeriodQuery = $this->getFactory()
-            ->getConditionalAvailabilityPeriodPropelQuery()
-            ->clear()
+        return $this->queryConditionalAvailabilityPeriodsByConditionalAvailabilityIds($conditionalAvailabilityIds)
             ->useFosConditionalAvailabilityQuery()
                 ->innerJoinSpyProduct()
             ->endUse()
@@ -48,6 +46,19 @@ class ConditionalAvailabilityPageSearchQueryContainer extends AbstractQueryConta
                 FosConditionalAvailabilityTableMap::COL_IS_ACCESSIBLE,
                 static::VIRTUAL_COLUMN_IS_ACCESSIBLE
             );
+    }
+
+    /**
+     * @param int[] $conditionalAvailabilityIds
+     *
+     * @return \Orm\Zed\ConditionalAvailability\Persistence\FosConditionalAvailabilityPeriodQuery
+     */
+    public function queryConditionalAvailabilityPeriodsByConditionalAvailabilityIds(
+        array $conditionalAvailabilityIds
+    ): FosConditionalAvailabilityPeriodQuery {
+        $fosConditionalAvailabilityPeriodQuery = $this->getFactory()
+            ->getConditionalAvailabilityPeriodPropelQuery()
+            ->clear();
 
         if (empty($conditionalAvailabilityIds)) {
             return $fosConditionalAvailabilityPeriodQuery;

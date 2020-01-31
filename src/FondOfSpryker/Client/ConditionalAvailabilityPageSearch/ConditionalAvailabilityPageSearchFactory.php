@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch;
 
+use FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToCustomerClientInterface;
 use FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToSearchClientInterface;
 use Spryker\Client\Kernel\AbstractFactory;
 use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
@@ -17,6 +18,16 @@ class ConditionalAvailabilityPageSearchFactory extends AbstractFactory
     public function getSearchClient(): ConditionalAvailabilityPageSearchToSearchClientInterface
     {
         return $this->getProvidedDependency(ConditionalAvailabilityPageSearchDependencyProvider::CLIENT_SEARCH);
+    }
+
+    /**
+     * @throws
+     *
+     * @return \FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToCustomerClientInterface
+     */
+    public function getCustomerClient(): ConditionalAvailabilityPageSearchToCustomerClientInterface
+    {
+        return $this->getProvidedDependency(ConditionalAvailabilityPageSearchDependencyProvider::CLIENT_CUSTOMER);
     }
 
     /**

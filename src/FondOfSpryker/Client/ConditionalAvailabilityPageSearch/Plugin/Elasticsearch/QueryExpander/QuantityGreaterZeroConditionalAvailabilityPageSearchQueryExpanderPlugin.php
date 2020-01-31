@@ -5,7 +5,6 @@ namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Plugin\Elastics
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Range;
-use FondOfSpryker\Shared\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchConstants;
 use Generated\Shared\Search\PageIndexMap;
 use InvalidArgumentException;
 use Spryker\Client\Kernel\AbstractPlugin;
@@ -15,29 +14,27 @@ use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
 /**
  * @method \FondOfSpryker\Client\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchFactory getFactory()
  */
-class EndAtConditionalAvailabilityPageSearchQueryExpanderPlugin extends AbstractPlugin implements QueryExpanderPluginInterface
+class QuantityGreaterZeroConditionalAvailabilityPageSearchQueryExpanderPlugin extends AbstractPlugin implements QueryExpanderPluginInterface
 {
     /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
      * @param \Spryker\Client\Search\Dependency\Plugin\QueryInterface $searchQuery
      * @param array $requestParameters
      *
      * @return \Spryker\Client\Search\Dependency\Plugin\QueryInterface
      */
-    public function expandQuery(QueryInterface $searchQuery, array $requestParameters = []): QueryInterface
+    public function expandQuery(QueryInterface $searchQuery, array $requestParameters = [])
     {
-        if (!isset($requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_END_AT])) {
-            return $searchQuery;
-        }
-
-        $endAt = $requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_END_AT];
-        $boolQuery = $this->getBoolQuery($searchQuery->getSearchQuery());
-
-        $endAtRange = (new Range())->addField(
-            PageIndexMap::END_AT,
-            ['lte' => $endAt->format('Y-m-d H:i:s')]
+        $quantityRange = (new Range())->addField(
+            PageIndexMap::QUANTITY,
+            ['gt' => 0]
         );
 
-        $boolQuery->addFilter($endAtRange);
+        $this->getBoolQuery($searchQuery->getSearchQuery())
+            ->addMust($quantityRange);
 
         return $searchQuery;
     }

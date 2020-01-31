@@ -2,12 +2,11 @@
 
 namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Plugin\Elasticsearch\QueryExpander;
 
-use DateTimeInterface;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Range;
-use FondOfSpryker\Shared\ConditionalAvailability\ConditionalAvailabilityConstants;
-use Generated\Shared\ConditionalAvailability\Search\PageIndexMap;
+use FondOfSpryker\Shared\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchConstants;
+use Generated\Shared\Search\PageIndexMap;
 use InvalidArgumentException;
 use Spryker\Client\Kernel\AbstractPlugin;
 use Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface;
@@ -26,49 +25,23 @@ class StartAtConditionalAvailabilityPageSearchQueryExpanderPlugin extends Abstra
      */
     public function expandQuery(QueryInterface $searchQuery, array $requestParameters = [])
     {
-        if ($this->hasDate($requestParameters)) {
-            $this->addDateFilterToQuery($searchQuery->getSearchQuery(), $this->getDateFrom($requestParameters));
+        if (!isset($requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_START_AT])) {
+            return $searchQuery;
         }
 
-        return $searchQuery;
-    }
+        $startAt = $requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_START_AT];
+        $boolQuery = $this->getBoolQuery($searchQuery->getSearchQuery());
 
-    /**
-     * @param array $requestParameters
-     *
-     * @return \DateTimeInterface
-     */
-    protected function getDateFrom(array $requestParameters): DateTimeInterface
-    {
-        return $requestParameters[ConditionalAvailabilityConstants::PARAMETER_START_AT];
-    }
-
-    /**
-     * @param array $requestParameters
-     *
-     * @return bool
-     */
-    protected function hasDate(array $requestParameters): bool
-    {
-        return array_key_exists(ConditionalAvailabilityConstants::PARAMETER_START_AT, $requestParameters);
-    }
-
-    /**
-     * @param \Elastica\Query $query
-     * @param \DateTimeInterface $dateTime
-     *
-     * @return void
-     */
-    protected function addDateFilterToQuery(Query $query, DateTimeInterface $dateTime): void
-    {
-        $boolQuery = $this->getBoolQuery($query);
-
-        $rangeEnd = (new Range())->addField(
-            PageIndexMap::STARTAT,
-            ['gte' => $dateTime->format('Y-m-d H:i:s')]
+        $startAtRange = (new Range())->addField(
+            PageIndexMap::START_AT,
+            [
+                'gte' => $startAt->format('Y-m-d H:i:s'),
+            ]
         );
 
-        $boolQuery->addFilter($rangeEnd);
+        $boolQuery->addFilter($startAtRange);
+
+        return $searchQuery;
     }
 
     /**

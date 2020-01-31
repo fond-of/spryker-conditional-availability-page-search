@@ -4,7 +4,7 @@ namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Plugin\Elastics
 
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
-use Elastica\Query\Range;
+use Elastica\Query\Term;
 use FondOfSpryker\Shared\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchConstants;
 use Generated\Shared\Search\PageIndexMap;
 use InvalidArgumentException;
@@ -12,10 +12,7 @@ use Spryker\Client\Kernel\AbstractPlugin;
 use Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface;
 use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
 
-/**
- * @method \FondOfSpryker\Client\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchFactory getFactory()
- */
-class EndAtConditionalAvailabilityPageSearchQueryExpanderPlugin extends AbstractPlugin implements QueryExpanderPluginInterface
+class SkuConditionalAvailabilityPageSearchQueryExpanderPlugin extends AbstractPlugin implements QueryExpanderPluginInterface
 {
     /**
      * @param \Spryker\Client\Search\Dependency\Plugin\QueryInterface $searchQuery
@@ -25,19 +22,18 @@ class EndAtConditionalAvailabilityPageSearchQueryExpanderPlugin extends Abstract
      */
     public function expandQuery(QueryInterface $searchQuery, array $requestParameters = []): QueryInterface
     {
-        if (!isset($requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_END_AT])) {
+        if (!isset($requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_SKU])) {
             return $searchQuery;
         }
 
-        $endAt = $requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_END_AT];
-        $boolQuery = $this->getBoolQuery($searchQuery->getSearchQuery());
+        $sku = $requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_SKU];
 
-        $endAtRange = (new Range())->addField(
-            PageIndexMap::END_AT,
-            ['lte' => $endAt->format('Y-m-d H:i:s')]
+        $skuTerm = (new Term())->setTerm(
+            PageIndexMap::SKU,
+            $sku
         );
 
-        $boolQuery->addFilter($endAtRange);
+        $this->getBoolQuery($searchQuery->getSearchQuery())->addMust($skuTerm);
 
         return $searchQuery;
     }

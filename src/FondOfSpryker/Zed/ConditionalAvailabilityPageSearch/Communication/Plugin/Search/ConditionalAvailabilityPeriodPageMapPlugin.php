@@ -67,7 +67,10 @@ class ConditionalAvailabilityPeriodPageMapPlugin extends AbstractPlugin implemen
             ->setIsActive(true)
             ->setSku($data[static::DATA_KEY_SKU])
             ->setStartAt((new DateTime($data[static::DATA_KEY_START_AT]))->format('Y-m-d H:i:s'))
-            ->setEndAt((new DateTime($data[static::DATA_KEY_END_AT]))->format('Y-m-d H:i:s'));
+            ->setEndAt((new DateTime($data[static::DATA_KEY_END_AT]))->format('Y-m-d H:i:s'))
+            ->setQuantity($data[static::DATA_KEY_QUANTITY])
+            ->setWarehouseGroup($data[static::DATA_KEY_WAREHOUSE_GROUP])
+            ->setIsAccessible($data[static::DATA_KEY_IS_ACCESSIBLE]);
 
         $pageMapBuilder->addSearchResultData($pageMapTransfer, static::KEY_SKU, $data[static::DATA_KEY_SKU])
             ->addSearchResultData($pageMapTransfer, static::KEY_QUANTITY, $data[static::DATA_KEY_QUANTITY])
@@ -76,9 +79,7 @@ class ConditionalAvailabilityPeriodPageMapPlugin extends AbstractPlugin implemen
             ->addSearchResultData($pageMapTransfer, static::KEY_START_AT, $data[static::DATA_KEY_START_AT])
             ->addSearchResultData($pageMapTransfer, static::KEY_END_AT, $data[static::DATA_KEY_END_AT])
             ->addFullTextBoosted($pageMapTransfer, $data[static::DATA_KEY_SKU])
-            ->addStringFacet($pageMapTransfer, static::KEY_WAREHOUSE_GROUP, $data[static::DATA_KEY_WAREHOUSE_GROUP])
-            ->addIntegerFacet($pageMapTransfer, static::KEY_IS_ACCESSIBLE, (int)$data[static::DATA_KEY_IS_ACCESSIBLE])
-            ->addIntegerFacet($pageMapTransfer, static::KEY_QUANTITY, (int)$data[static::DATA_KEY_QUANTITY]);
+            ->addFullTextBoosted($pageMapTransfer, $data[static::DATA_KEY_WAREHOUSE_GROUP]);
 
         $pageMapTransfer = $this->expandPageMap($pageMapTransfer, $pageMapBuilder, $data, $locale);
 

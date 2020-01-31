@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Plugin\Elasticsearch\QueryExpander;
 
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
-use Elastica\Query\Range;
+use Elastica\Query\Term;
 use FondOfSpryker\Shared\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchConstants;
 use Generated\Shared\Search\PageIndexMap;
 use InvalidArgumentException;
@@ -15,7 +17,7 @@ use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
 /**
  * @method \FondOfSpryker\Client\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchFactory getFactory()
  */
-class EndAtConditionalAvailabilityPageSearchQueryExpanderPlugin extends AbstractPlugin implements QueryExpanderPluginInterface
+class WarehouseGroupConditionalAvailabilityPageSearchQueryExpanderPlugin extends AbstractPlugin implements QueryExpanderPluginInterface
 {
     /**
      * @param \Spryker\Client\Search\Dependency\Plugin\QueryInterface $searchQuery
@@ -25,19 +27,18 @@ class EndAtConditionalAvailabilityPageSearchQueryExpanderPlugin extends Abstract
      */
     public function expandQuery(QueryInterface $searchQuery, array $requestParameters = []): QueryInterface
     {
-        if (!isset($requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_END_AT])) {
+        if (!isset($requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_WAREHOUSE_GROUP])) {
             return $searchQuery;
         }
 
-        $endAt = $requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_END_AT];
-        $boolQuery = $this->getBoolQuery($searchQuery->getSearchQuery());
+        $warehouseGroup = $requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_WAREHOUSE_GROUP];
 
-        $endAtRange = (new Range())->addField(
-            PageIndexMap::END_AT,
-            ['lte' => $endAt->format('Y-m-d H:i:s')]
+        $warehouseGroupTerm = (new Term())->setTerm(
+            PageIndexMap::WAREHOUSE_GROUP,
+            $warehouseGroup
         );
 
-        $boolQuery->addFilter($endAtRange);
+        $this->getBoolQuery($searchQuery->getSearchQuery())->addMust($warehouseGroupTerm);
 
         return $searchQuery;
     }

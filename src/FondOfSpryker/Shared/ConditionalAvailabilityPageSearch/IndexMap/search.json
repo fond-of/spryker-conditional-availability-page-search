@@ -10,11 +10,11 @@
           "type": "integer",
           "include_in_all": false
         },
-        "warehouseGroup": {
+        "warehouse-group": {
           "type": "keyword",
           "include_in_all": false
         },
-        "isAccessible": {
+        "is-accessible": {
           "type": "boolean",
           "include_in_all": false
         },

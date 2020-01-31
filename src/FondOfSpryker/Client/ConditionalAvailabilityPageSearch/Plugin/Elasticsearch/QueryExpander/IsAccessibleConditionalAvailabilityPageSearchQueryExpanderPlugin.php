@@ -4,9 +4,9 @@ namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Plugin\Elastics
 
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
-use Elastica\Query\Range;
-use FondOfSpryker\Shared\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchConstants;
+use Elastica\Query\Term;
 use Generated\Shared\Search\PageIndexMap;
+use Generated\Shared\Transfer\CustomerTransfer;
 use InvalidArgumentException;
 use Spryker\Client\Kernel\AbstractPlugin;
 use Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface;
@@ -15,7 +15,7 @@ use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
 /**
  * @method \FondOfSpryker\Client\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchFactory getFactory()
  */
-class EndAtConditionalAvailabilityPageSearchQueryExpanderPlugin extends AbstractPlugin implements QueryExpanderPluginInterface
+class IsAccessibleConditionalAvailabilityPageSearchQueryExpanderPlugin extends AbstractPlugin implements QueryExpanderPluginInterface
 {
     /**
      * @param \Spryker\Client\Search\Dependency\Plugin\QueryInterface $searchQuery
@@ -25,21 +25,30 @@ class EndAtConditionalAvailabilityPageSearchQueryExpanderPlugin extends Abstract
      */
     public function expandQuery(QueryInterface $searchQuery, array $requestParameters = []): QueryInterface
     {
-        if (!isset($requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_END_AT])) {
+        $customerTransfer = $this->getCustomer();
+
+        if ($customerTransfer === null) {
             return $searchQuery;
         }
 
-        $endAt = $requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_END_AT];
         $boolQuery = $this->getBoolQuery($searchQuery->getSearchQuery());
 
-        $endAtRange = (new Range())->addField(
-            PageIndexMap::END_AT,
-            ['lte' => $endAt->format('Y-m-d H:i:s')]
-        );
+        $isAccessibleTerm = (new Term())
+            ->setTerm(PageIndexMap::IS_ACCESSIBLE, $customerTransfer->getHasAvailabilityRestrictions());
 
-        $boolQuery->addFilter($endAtRange);
+        $boolQuery->addMust($isAccessibleTerm);
 
         return $searchQuery;
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\CustomerTransfer|null
+     */
+    protected function getCustomer(): ?CustomerTransfer
+    {
+        return $this->getFactory()
+            ->getCustomerClient()
+            ->getCustomer();
     }
 
     /**

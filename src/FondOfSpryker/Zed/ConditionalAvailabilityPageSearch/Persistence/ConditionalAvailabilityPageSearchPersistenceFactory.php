@@ -7,7 +7,7 @@ use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Persistence\Propel\Mappe
 use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Persistence\Propel\Mapper\ConditionalAvailabilityPeriodPageSearchMapperInterface;
 use Orm\Zed\ConditionalAvailability\Persistence\FosConditionalAvailabilityPeriodQuery;
 use Orm\Zed\ConditionalAvailability\Persistence\FosConditionalAvailabilityQuery;
-use Orm\Zed\PriceProductPriceListPageSearch\Persistence\FosConditionalAvailabilityPeriodPageSearchQuery;
+use Orm\Zed\ConditionalAvailabilityPageSearch\Persistence\FosConditionalAvailabilityPeriodPageSearchQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
 /**
@@ -19,7 +19,7 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 class ConditionalAvailabilityPageSearchPersistenceFactory extends AbstractPersistenceFactory
 {
     /**
-     * @return \Orm\Zed\PriceProductPriceListPageSearch\Persistence\FosConditionalAvailabilityPeriodPageSearchQuery
+     * @return \Orm\Zed\ConditionalAvailabilityPageSearch\Persistence\FosConditionalAvailabilityPeriodPageSearchQuery
      */
     public function createConditionalAvailabilityPeriodPageSearchQuery(): FosConditionalAvailabilityPeriodPageSearchQuery
     {

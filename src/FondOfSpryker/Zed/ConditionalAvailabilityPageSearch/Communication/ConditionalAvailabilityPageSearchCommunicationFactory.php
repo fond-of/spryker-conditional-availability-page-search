@@ -19,7 +19,7 @@ class ConditionalAvailabilityPageSearchCommunicationFactory extends AbstractComm
     /**
      * @throws
      *
-     * @return array
+     * @return \FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageMapExpanderPluginInterface[]
      */
     public function getConditionalAvailabilityPeriodPageMapExpanderPlugins(): array
     {

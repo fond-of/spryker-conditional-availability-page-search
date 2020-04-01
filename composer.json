@@ -13,7 +13,14 @@
     }
   ],
   "require": {
-    "php": ">=7.1"
+    "php": ">=7.1",
+    "fond-of-spryker/conditional-availability-page-search-extension": "dev-master",
+    "fond-of-spryker/conditional-availability": "dev-master",
+    "spryker/customer": "^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0",
+    "spryker/event": "^1.0.0 || ^2.0.0",
+    "spryker/event-behavior": "^1.0.0",
+    "spryker/search": "^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0",
+    "spryker/synchronization-extension": "^1.0.0"
   },
   "require-dev": {
     "spryker/code-sniffer": "^0.12",
@@ -21,7 +28,8 @@
     "mikey179/vfsstream": "^1.6",
     "phpro/grumphp": "^0.14",
     "sebastian/phpcpd": "^4.0",
-    "php-coveralls/php-coveralls": "^2.1"
+    "php-coveralls/php-coveralls": "^2.1",
+    "fond-of-codeception/spryker": "dev-master"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
@@ -32,7 +40,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "FondOfSpryker\\": "tests/FondOfSpryker/"
+      "FondOfSpryker\\": "tests/FondOfSpryker/",
+      "Generated\\": "src/Generated/"
     }
   }
 }

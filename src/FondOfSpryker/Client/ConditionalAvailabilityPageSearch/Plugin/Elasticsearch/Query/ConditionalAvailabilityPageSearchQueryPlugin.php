@@ -93,8 +93,6 @@ class ConditionalAvailabilityPageSearchQueryPlugin extends AbstractPlugin implem
     /**
      * @param string $searchString
      *
-     * @throws
-     *
      * @return \Elastica\Query\AbstractQuery
      */
     protected function createFulltextSearchQuery($searchString): AbstractQuery

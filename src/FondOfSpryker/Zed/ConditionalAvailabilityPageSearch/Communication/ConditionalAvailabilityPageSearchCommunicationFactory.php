@@ -17,8 +17,6 @@ use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 class ConditionalAvailabilityPageSearchCommunicationFactory extends AbstractCommunicationFactory
 {
     /**
-     * @throws
-     *
      * @return \FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageMapExpanderPluginInterface[]
      */
     public function getConditionalAvailabilityPeriodPageMapExpanderPlugins(): array
@@ -29,8 +27,6 @@ class ConditionalAvailabilityPageSearchCommunicationFactory extends AbstractComm
     }
 
     /**
-     * @throws
-     *
      * @return \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface
      */
     public function getStoreFacade(): ConditionalAvailabilityPageSearchToStoreFacadeInterface
@@ -41,8 +37,6 @@ class ConditionalAvailabilityPageSearchCommunicationFactory extends AbstractComm
     }
 
     /**
-     * @throws
-     *
      * @return \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToEventBehaviorFacadeInterface
      */
     public function getEventBehaviorFacade(): ConditionalAvailabilityPageSearchToEventBehaviorFacadeInterface

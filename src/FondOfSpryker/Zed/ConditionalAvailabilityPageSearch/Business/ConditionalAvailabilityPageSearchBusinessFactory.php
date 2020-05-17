@@ -56,8 +56,6 @@ class ConditionalAvailabilityPageSearchBusinessFactory extends AbstractBusinessF
     }
 
     /**
-     * @throws
-     *
      * @return \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToSearchFacadeInterface
      */
     protected function getSearchFacade(): ConditionalAvailabilityPageSearchToSearchFacadeInterface
@@ -66,8 +64,6 @@ class ConditionalAvailabilityPageSearchBusinessFactory extends AbstractBusinessF
     }
 
     /**
-     * @throws
-     *
      * @return \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface
      */
     protected function getStoreFacade(): ConditionalAvailabilityPageSearchToStoreFacadeInterface
@@ -76,8 +72,6 @@ class ConditionalAvailabilityPageSearchBusinessFactory extends AbstractBusinessF
     }
 
     /**
-     * @throws
-     *
      * @return \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Service\ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface
      */
     protected function getUtilEncodingService(): ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface
@@ -86,8 +80,6 @@ class ConditionalAvailabilityPageSearchBusinessFactory extends AbstractBusinessF
     }
 
     /**
-     * @throws
-     *
      * @return \FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface[]
      */
     protected function getConditionalAvailabilityPeriodPageDataExpanderPlugins(): array

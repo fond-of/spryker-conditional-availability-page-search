@@ -26,8 +26,9 @@ class ConditionalAvailabilityPageSearchQueryContainer extends AbstractQueryConta
     public function queryConditionalAvailabilityPeriodsWithConditionalAvailabilityAndProductByConditionalAvailabilityIds(
         array $conditionalAvailabilityIds
     ): FosConditionalAvailabilityPeriodQuery {
-        return $this->queryConditionalAvailabilityPeriodsByConditionalAvailabilityIds($conditionalAvailabilityIds)
-            ->useFosConditionalAvailabilityQuery()
+        $fosConditionalAvailabilityPeriodQuery = $this->queryConditionalAvailabilityPeriodsByConditionalAvailabilityIds($conditionalAvailabilityIds);
+
+        $fosConditionalAvailabilityPeriodQuery->useFosConditionalAvailabilityQuery()
                 ->innerJoinSpyProduct()
             ->endUse()
             ->withColumn(
@@ -46,6 +47,8 @@ class ConditionalAvailabilityPageSearchQueryContainer extends AbstractQueryConta
                 FosConditionalAvailabilityTableMap::COL_IS_ACCESSIBLE,
                 static::VIRTUAL_COLUMN_IS_ACCESSIBLE
             );
+
+        return $fosConditionalAvailabilityPeriodQuery;
     }
 
     /**

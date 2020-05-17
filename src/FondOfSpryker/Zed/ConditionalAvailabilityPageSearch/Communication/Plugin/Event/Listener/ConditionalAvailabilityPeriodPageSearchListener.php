@@ -22,8 +22,6 @@ class ConditionalAvailabilityPeriodPageSearchListener extends AbstractPlugin imp
      * @param array $eventTransfers
      * @param string $eventName
      *
-     * @throws
-     *
      * @return void
      */
     public function handleBulk(array $eventTransfers, $eventName): void

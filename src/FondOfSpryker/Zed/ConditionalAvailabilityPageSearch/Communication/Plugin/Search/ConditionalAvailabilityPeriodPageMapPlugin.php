@@ -48,8 +48,6 @@ class ConditionalAvailabilityPeriodPageMapPlugin extends AbstractPlugin implemen
      * @param array $data
      * @param \Generated\Shared\Transfer\LocaleTransfer $locale
      *
-     * @throws
-     *
      * @return \Generated\Shared\Transfer\PageMapTransfer
      */
     public function buildPageMap(PageMapBuilderInterface $pageMapBuilder, array $data, LocaleTransfer $locale): PageMapTransfer

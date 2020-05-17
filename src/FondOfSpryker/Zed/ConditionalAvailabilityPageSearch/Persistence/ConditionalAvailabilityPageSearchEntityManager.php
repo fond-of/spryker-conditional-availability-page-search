@@ -14,8 +14,6 @@ class ConditionalAvailabilityPageSearchEntityManager extends AbstractEntityManag
     /**
      * @param array $conditionalAvailabilityIds
      *
-     * @throws
-     *
      * @return void
      */
     public function deleteConditionalAvailabilityPeriodSearchPagesByConditionalAvailabilityIds(
@@ -29,8 +27,6 @@ class ConditionalAvailabilityPageSearchEntityManager extends AbstractEntityManag
 
     /**
      * @param \Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransfer
-     *
-     * @throws
      *
      * @return void
      */

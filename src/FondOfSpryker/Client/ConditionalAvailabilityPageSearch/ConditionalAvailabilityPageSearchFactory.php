@@ -11,8 +11,6 @@ use Spryker\Client\Search\Dependency\Plugin\SearchStringSetterInterface;
 class ConditionalAvailabilityPageSearchFactory extends AbstractFactory
 {
     /**
-     * @throws
-     *
      * @return \FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToSearchClientInterface
      */
     public function getSearchClient(): ConditionalAvailabilityPageSearchToSearchClientInterface
@@ -21,8 +19,6 @@ class ConditionalAvailabilityPageSearchFactory extends AbstractFactory
     }
 
     /**
-     * @throws
-     *
      * @return \FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToCustomerClientInterface
      */
     public function getCustomerClient(): ConditionalAvailabilityPageSearchToCustomerClientInterface
@@ -47,8 +43,6 @@ class ConditionalAvailabilityPageSearchFactory extends AbstractFactory
     }
 
     /**
-     * @throws
-     *
      * @return \Spryker\Client\Search\Dependency\Plugin\QueryInterface
      */
     protected function getSearchQueryPlugin(): QueryInterface
@@ -59,8 +53,6 @@ class ConditionalAvailabilityPageSearchFactory extends AbstractFactory
     }
 
     /**
-     * @throws
-     *
      * @return \Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface[]
      */
     public function getSearchQueryExpanderPlugins(): array
@@ -71,8 +63,6 @@ class ConditionalAvailabilityPageSearchFactory extends AbstractFactory
     }
 
     /**
-     * @throws
-     *
      * @return \Spryker\Client\Search\Dependency\Plugin\ResultFormatterPluginInterface[]
      */
     public function getSearchResultFormatterPlugins(): array

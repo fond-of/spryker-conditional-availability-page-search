@@ -50,8 +50,8 @@ class ConditionalAvailabilityPageSearchToStoreFacadeBridgeTest extends Unit
             ->method('getCurrentStore')
             ->willReturn($this->storeTransferMock);
 
-        $this->assertInstanceOf(
-            StoreTransfer::class,
+        $this->assertEquals(
+            $this->storeTransferMock,
             $this->conditionalAvailabilityPageSearchToStoreFacadeBridge->getCurrentStore()
         );
     }

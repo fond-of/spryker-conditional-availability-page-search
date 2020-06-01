@@ -2,13 +2,10 @@
 
 namespace FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business\Model;
 
-use FondOfSpryker\Shared\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchConstants;
-use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToSearchFacadeInterface;
 use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Service\ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface;
 use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchEntityManagerInterface;
 use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchQueryContainerInterface;
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer;
-use Generated\Shared\Transfer\LocaleTransfer;
 use Orm\Zed\ConditionalAvailability\Persistence\Base\FosConditionalAvailabilityPeriod;
 
 class ConditionalAvailabilityPeriodPageSearchPublisher implements ConditionalAvailabilityPeriodPageSearchPublisherInterface
@@ -29,34 +26,34 @@ class ConditionalAvailabilityPeriodPageSearchPublisher implements ConditionalAva
     protected $conditionalAvailabilityPeriodPageSearchExpander;
 
     /**
-     * @var \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToSearchFacadeInterface
-     */
-    protected $searchFacade;
-
-    /**
      * @var \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Service\ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface
      */
     protected $utilEncodingService;
 
     /**
+     * @var \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchDataMapperInterface
+     */
+    protected $conditionalAvailabilityPeriodPageSearchDataMapper;
+
+    /**
      * @param \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchQueryContainerInterface $queryContainer
      * @param \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchEntityManagerInterface $entityManager
      * @param \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchExpanderInterface $conditionalAvailabilityPeriodPageSearchExpander
-     * @param \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToSearchFacadeInterface $searchFacade
      * @param \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Service\ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface $utilEncodingService
+     * @param \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchDataMapperInterface $conditionalAvailabilityPeriodPageSearchDataMapper
      */
     public function __construct(
         ConditionalAvailabilityPageSearchQueryContainerInterface $queryContainer,
         ConditionalAvailabilityPageSearchEntityManagerInterface $entityManager,
         ConditionalAvailabilityPeriodPageSearchExpanderInterface $conditionalAvailabilityPeriodPageSearchExpander,
-        ConditionalAvailabilityPageSearchToSearchFacadeInterface $searchFacade,
-        ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface $utilEncodingService
+        ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface $utilEncodingService,
+        ConditionalAvailabilityPeriodPageSearchDataMapperInterface $conditionalAvailabilityPeriodPageSearchDataMapper
     ) {
         $this->queryContainer = $queryContainer;
         $this->entityManager = $entityManager;
         $this->conditionalAvailabilityPeriodPageSearchExpander = $conditionalAvailabilityPeriodPageSearchExpander;
-        $this->searchFacade = $searchFacade;
         $this->utilEncodingService = $utilEncodingService;
+        $this->conditionalAvailabilityPeriodPageSearchDataMapper = $conditionalAvailabilityPeriodPageSearchDataMapper;
     }
 
     /**
@@ -131,11 +128,8 @@ class ConditionalAvailabilityPeriodPageSearchPublisher implements ConditionalAva
             $conditionalAvailabilityPeriodPageSearchTransfer->getData()
         );
 
-        $data = $this->searchFacade->transformPageMapToDocumentByMapperName(
-            $data,
-            new LocaleTransfer(),
-            ConditionalAvailabilityPageSearchConstants::CONDITIONAL_AVAILABILITY_PERIOD_RESOURCE_NAME
-        );
+        $data = $this->conditionalAvailabilityPeriodPageSearchDataMapper
+            ->mapConditionalAvailabilityPeriodDataToSearchData($data);
 
         $structuredData = $this->utilEncodingService->encodeJson($data);
 

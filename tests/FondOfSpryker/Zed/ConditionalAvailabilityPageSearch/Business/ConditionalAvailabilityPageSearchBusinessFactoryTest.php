@@ -3,15 +3,13 @@
 namespace FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business;
 
 use Codeception\Test\Unit;
-use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchPublisherInterface;
-use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchUnpublisherInterface;
+use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchPublisher;
+use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchUnpublisher;
 use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchDependencyProvider;
-use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToSearchFacadeInterface;
 use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface;
 use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Service\ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface;
 use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchEntityManager;
 use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchQueryContainer;
-use FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface;
 use Spryker\Zed\Kernel\Container;
 
 class ConditionalAvailabilityPageSearchBusinessFactoryTest extends Unit
@@ -39,27 +37,22 @@ class ConditionalAvailabilityPageSearchBusinessFactoryTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface
      */
-    protected $conditionalAvailabilityPageSearchToStoreFacadeInterfaceMock;
+    protected $conditionalAvailabilityPageSearchToStoreFacadeMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface
+     * @var \FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface[]
      */
-    protected $conditionalAvailabilityPeriodPageDataExpanderPluginInterfaceMock;
-
-    /**
-     * @var array|\FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface[]
-     */
-    protected $conditionalAvailabilityPeriodPageDataExpanderPluginInterfaceMocks;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToSearchFacadeInterface
-     */
-    protected $conditionalAvailabilityPageSearchToSearchFacadeInterfaceMock;
+    protected $conditionalAvailabilityPeriodPageDataExpanderPluginMocks;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Service\ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface
      */
-    protected $conditionalAvailabilityPageSearchToUtilEncodingServiceInterfaceMock;
+    protected $conditionalAvailabilityPageSearchToUtilEncodingServiceMock;
+
+    /**
+     * @var \FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface[]
+     */
+    protected $conditionalAvailabilityPeriodPageSearchDataExpanderPluginMocks;
 
     /**
      * @return void
@@ -78,25 +71,17 @@ class ConditionalAvailabilityPageSearchBusinessFactoryTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPageSearchToStoreFacadeInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchToStoreFacadeInterface::class)
+        $this->conditionalAvailabilityPageSearchToStoreFacadeMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchToStoreFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPeriodPageDataExpanderPluginInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityPeriodPageDataExpanderPluginInterface::class)
+        $this->conditionalAvailabilityPeriodPageDataExpanderPluginMocks = [];
+
+        $this->conditionalAvailabilityPageSearchToUtilEncodingServiceMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPeriodPageDataExpanderPluginInterfaceMocks = [
-            $this->conditionalAvailabilityPageSearchToStoreFacadeInterfaceMock,
-        ];
-
-        $this->conditionalAvailabilityPageSearchToSearchFacadeInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchToSearchFacadeInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->conditionalAvailabilityPageSearchToUtilEncodingServiceInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->conditionalAvailabilityPeriodPageSearchDataExpanderPluginMocks = [];
 
         $this->conditionalAvailabilityPageSearchBusinessFactory = new ConditionalAvailabilityPageSearchBusinessFactory();
         $this->conditionalAvailabilityPageSearchBusinessFactory->setQueryContainer($this->conditionalAvailabilityPageSearchQueryContainerMock);
@@ -118,17 +103,19 @@ class ConditionalAvailabilityPageSearchBusinessFactoryTest extends Unit
             ->withConsecutive(
                 [ConditionalAvailabilityPageSearchDependencyProvider::FACADE_STORE],
                 [ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_DATA_EXPANDER],
-                [ConditionalAvailabilityPageSearchDependencyProvider::FACADE_SEARCH],
-                [ConditionalAvailabilityPageSearchDependencyProvider::SERVICE_UTIL_ENCODING]
+                [ConditionalAvailabilityPageSearchDependencyProvider::SERVICE_UTIL_ENCODING],
+                [ConditionalAvailabilityPageSearchDependencyProvider::FACADE_STORE],
+                [ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_SEARCH_DATA_EXPANDER]
             )->willReturnOnConsecutiveCalls(
-                $this->conditionalAvailabilityPageSearchToStoreFacadeInterfaceMock,
-                $this->conditionalAvailabilityPeriodPageDataExpanderPluginInterfaceMocks,
-                $this->conditionalAvailabilityPageSearchToSearchFacadeInterfaceMock,
-                $this->conditionalAvailabilityPageSearchToUtilEncodingServiceInterfaceMock
+                $this->conditionalAvailabilityPageSearchToStoreFacadeMock,
+                $this->conditionalAvailabilityPeriodPageDataExpanderPluginMocks,
+                $this->conditionalAvailabilityPageSearchToUtilEncodingServiceMock,
+                $this->conditionalAvailabilityPageSearchToStoreFacadeMock,
+                $this->conditionalAvailabilityPeriodPageSearchDataExpanderPluginMocks
             );
 
         $this->assertInstanceOf(
-            ConditionalAvailabilityPeriodPageSearchPublisherInterface::class,
+            ConditionalAvailabilityPeriodPageSearchPublisher::class,
             $this->conditionalAvailabilityPageSearchBusinessFactory->createConditionalAvailabilityPeriodPageSearchPublisher()
         );
     }
@@ -139,7 +126,7 @@ class ConditionalAvailabilityPageSearchBusinessFactoryTest extends Unit
     public function testCreateConditionalAvailabilityPeriodPageSearchUnpublisher(): void
     {
         $this->assertInstanceOf(
-            ConditionalAvailabilityPeriodPageSearchUnpublisherInterface::class,
+            ConditionalAvailabilityPeriodPageSearchUnpublisher::class,
             $this->conditionalAvailabilityPageSearchBusinessFactory->createConditionalAvailabilityPeriodPageSearchUnpublisher()
         );
     }

@@ -44,7 +44,7 @@ class ConditionalAvailabilityPeriodSynchronizationDataBulkRepositoryPlugin exten
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @param int $offset
      * @param int $limit
@@ -79,7 +79,7 @@ class ConditionalAvailabilityPeriodSynchronizationDataBulkRepositoryPlugin exten
      */
     public function getParams(): array
     {
-        return ['type' => 'page'];
+        return ['type' => 'conditional-availability-period'];
     }
 
     /**
@@ -95,6 +95,6 @@ class ConditionalAvailabilityPeriodSynchronizationDataBulkRepositoryPlugin exten
      */
     public function getSynchronizationQueuePoolName(): ?string
     {
-        $this->getConfig()->getConditionalAvailabilityPeriodSynchronizationPoolName();
+        return $this->getConfig()->getConditionalAvailabilityPeriodSynchronizationPoolName();
     }
 }

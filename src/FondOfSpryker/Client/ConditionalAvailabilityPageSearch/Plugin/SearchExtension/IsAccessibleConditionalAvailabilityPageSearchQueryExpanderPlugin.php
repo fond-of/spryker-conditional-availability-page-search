@@ -1,16 +1,16 @@
 <?php
 
-namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Plugin\Elasticsearch\QueryExpander;
+namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Plugin\SearchExtension;
 
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Term;
-use Generated\Shared\Search\PageIndexMap;
+use Generated\Shared\Search\ConditionalAvailabilityPeriodIndexMap;
 use Generated\Shared\Transfer\CustomerTransfer;
 use InvalidArgumentException;
 use Spryker\Client\Kernel\AbstractPlugin;
-use Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface;
-use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
+use Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface;
+use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 
 /**
  * @method \FondOfSpryker\Client\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchFactory getFactory()
@@ -18,10 +18,14 @@ use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
 class IsAccessibleConditionalAvailabilityPageSearchQueryExpanderPlugin extends AbstractPlugin implements QueryExpanderPluginInterface
 {
     /**
-     * @param \Spryker\Client\Search\Dependency\Plugin\QueryInterface $searchQuery
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface $searchQuery
      * @param array $requestParameters
      *
-     * @return \Spryker\Client\Search\Dependency\Plugin\QueryInterface
+     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
      */
     public function expandQuery(QueryInterface $searchQuery, array $requestParameters = []): QueryInterface
     {
@@ -34,7 +38,7 @@ class IsAccessibleConditionalAvailabilityPageSearchQueryExpanderPlugin extends A
         $boolQuery = $this->getBoolQuery($searchQuery->getSearchQuery());
 
         $isAccessibleTerm = (new Term())
-            ->setTerm(PageIndexMap::IS_ACCESSIBLE, $customerTransfer->getHasAvailabilityRestrictions());
+            ->setTerm(ConditionalAvailabilityPeriodIndexMap::IS_ACCESSIBLE, $customerTransfer->getHasAvailabilityRestrictions());
 
         $boolQuery->addMust($isAccessibleTerm);
 

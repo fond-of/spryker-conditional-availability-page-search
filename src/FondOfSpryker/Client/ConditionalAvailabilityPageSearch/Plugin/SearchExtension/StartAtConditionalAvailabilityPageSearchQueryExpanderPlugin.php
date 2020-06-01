@@ -1,43 +1,46 @@
 <?php
 
-namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Plugin\Elasticsearch\QueryExpander;
+namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Plugin\SearchExtension;
 
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Range;
 use FondOfSpryker\Shared\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchConstants;
-use Generated\Shared\Search\PageIndexMap;
+use Generated\Shared\Search\ConditionalAvailabilityPeriodIndexMap;
 use InvalidArgumentException;
 use Spryker\Client\Kernel\AbstractPlugin;
-use Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface;
-use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
+use Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface;
+use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 
-/**
- * @method \FondOfSpryker\Client\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchFactory getFactory()
- */
-class EndAtConditionalAvailabilityPageSearchQueryExpanderPlugin extends AbstractPlugin implements QueryExpanderPluginInterface
+class StartAtConditionalAvailabilityPageSearchQueryExpanderPlugin extends AbstractPlugin implements QueryExpanderPluginInterface
 {
     /**
-     * @param \Spryker\Client\Search\Dependency\Plugin\QueryInterface $searchQuery
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface $searchQuery
      * @param array $requestParameters
      *
-     * @return \Spryker\Client\Search\Dependency\Plugin\QueryInterface
+     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
      */
     public function expandQuery(QueryInterface $searchQuery, array $requestParameters = []): QueryInterface
     {
-        if (!isset($requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_END_AT])) {
+        if (!isset($requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_START_AT])) {
             return $searchQuery;
         }
 
-        $endAt = $requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_END_AT];
+        $startAt = $requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_START_AT];
         $boolQuery = $this->getBoolQuery($searchQuery->getSearchQuery());
 
-        $endAtRange = (new Range())->addField(
-            PageIndexMap::END_AT,
-            ['lte' => $endAt->format('Y-m-d H:i:s')]
+        $startAtRange = (new Range())->addField(
+            ConditionalAvailabilityPeriodIndexMap::START_AT,
+            [
+                'gte' => $startAt->format('Y-m-d H:i:s'),
+            ]
         );
 
-        $boolQuery->addFilter($endAtRange);
+        $boolQuery->addFilter($startAtRange);
 
         return $searchQuery;
     }

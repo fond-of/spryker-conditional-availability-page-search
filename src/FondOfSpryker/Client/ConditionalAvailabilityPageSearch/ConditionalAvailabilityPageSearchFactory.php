@@ -5,8 +5,8 @@ namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch;
 use FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToCustomerClientInterface;
 use FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToSearchClientInterface;
 use Spryker\Client\Kernel\AbstractFactory;
-use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
-use Spryker\Client\Search\Dependency\Plugin\SearchStringSetterInterface;
+use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
+use Spryker\Client\SearchExtension\Dependency\Plugin\SearchStringSetterInterface;
 
 class ConditionalAvailabilityPageSearchFactory extends AbstractFactory
 {
@@ -29,7 +29,7 @@ class ConditionalAvailabilityPageSearchFactory extends AbstractFactory
     /**
      * @param string $searchString
      *
-     * @return \Spryker\Client\Search\Dependency\Plugin\QueryInterface
+     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
      */
     public function createSearchQuery(string $searchString): QueryInterface
     {
@@ -43,7 +43,7 @@ class ConditionalAvailabilityPageSearchFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Client\Search\Dependency\Plugin\QueryInterface
+     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
      */
     protected function getSearchQueryPlugin(): QueryInterface
     {
@@ -53,7 +53,7 @@ class ConditionalAvailabilityPageSearchFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface[]
+     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface[]
      */
     public function getSearchQueryExpanderPlugins(): array
     {
@@ -63,7 +63,7 @@ class ConditionalAvailabilityPageSearchFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Client\Search\Dependency\Plugin\ResultFormatterPluginInterface[]
+     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface[]
      */
     public function getSearchResultFormatterPlugins(): array
     {

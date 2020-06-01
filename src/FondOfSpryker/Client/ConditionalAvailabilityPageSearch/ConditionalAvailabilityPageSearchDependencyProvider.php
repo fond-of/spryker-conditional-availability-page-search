@@ -4,7 +4,7 @@ namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch;
 
 use FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToCustomerClientBridge;
 use FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToSearchClientBridge;
-use FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Plugin\Elasticsearch\Query\ConditionalAvailabilityPageSearchQueryPlugin;
+use FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Plugin\SearchExtension\ConditionalAvailabilityPageSearchQueryPlugin;
 use Spryker\Client\Kernel\AbstractDependencyProvider;
 use Spryker\Client\Kernel\Container;
 

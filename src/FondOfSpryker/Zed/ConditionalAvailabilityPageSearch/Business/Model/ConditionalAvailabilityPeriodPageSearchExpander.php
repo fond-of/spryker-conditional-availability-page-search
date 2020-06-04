@@ -31,6 +31,11 @@ class ConditionalAvailabilityPeriodPageSearchExpander implements ConditionalAvai
         $this->conditionalAvailabilityPeriodPageDataExpanderPlugins = $conditionalAvailabilityPeriodPageDataExpanderPlugins;
     }
 
+    /**
+     * @param \Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransfer
+     *
+     * @return \Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer
+     */
     public function expand(
         ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransfer
     ): ConditionalAvailabilityPeriodPageSearchTransfer {

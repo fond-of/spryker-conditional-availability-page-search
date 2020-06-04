@@ -7,11 +7,18 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 /**
  * @method \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchEntityManagerInterface getEntityManager()
  * @method \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business\ConditionalAvailabilityPageSearchBusinessFactory getFactory()
+ * @method \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchRepositoryInterface getRepository()
  */
 class ConditionalAvailabilityPageSearchFacade extends AbstractFacade implements ConditionalAvailabilityPageSearchFacadeInterface
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param int[] $concreteIds
+     *
+     * @return int[]
      */
     public function getConditionalAvailabilityIdsByConcreteIds(array $concreteIds): array
     {
@@ -19,7 +26,7 @@ class ConditionalAvailabilityPageSearchFacade extends AbstractFacade implements 
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -34,7 +41,7 @@ class ConditionalAvailabilityPageSearchFacade extends AbstractFacade implements 
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *

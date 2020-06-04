@@ -31,7 +31,8 @@ class ConditionalAvailabilityPageSearchListener extends AbstractPlugin implement
             ->getEventBehaviorFacade()
             ->getEventTransferIds($eventTransfers);
 
-        if ($eventName === ConditionalAvailabilityEvents::ENTITY_FOS_CONDITIONAL_AVAILABILITY_DELETE ||
+        if (
+            $eventName === ConditionalAvailabilityEvents::ENTITY_FOS_CONDITIONAL_AVAILABILITY_DELETE ||
             $eventName === ConditionalAvailabilityEvents::CONDITIONAL_AVAILABILITY_UNPUBLISH
         ) {
             $this->getFacade()->unpublish($conditionalAvailabilityIds);

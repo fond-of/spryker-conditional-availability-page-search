@@ -28,7 +28,7 @@ class RawConditionalAvailabilityPeriodsResultFormatterPlugin extends AbstractEla
     {
         $rawConditionalAvailabilityPeriods = [];
         foreach ($searchResult->getResults() as $document) {
-            $rawConditionalAvailabilityPeriods[] = $$document->getSource()[ConditionalAvailabilityPeriodIndexMap::SEARCH_RESULT_DATA];
+            $rawConditionalAvailabilityPeriods[] = $document->getSource()[ConditionalAvailabilityPeriodIndexMap::SEARCH_RESULT_DATA];
         }
 
         return $rawConditionalAvailabilityPeriods;

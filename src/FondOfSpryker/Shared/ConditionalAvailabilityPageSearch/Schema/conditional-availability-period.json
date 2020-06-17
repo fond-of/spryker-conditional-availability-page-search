@@ -38,11 +38,11 @@
         },
         "start-at": {
           "type": "date",
-          "format": "yyyy-MM-dd HH:mm:ss.SSSZ"
+          "format": "yyyy-MM-dd HH:mm:ss.SSSSSS"
         },
         "end-at": {
           "type": "date",
-          "format": "yyyy-MM-dd HH:mm:ss.SSSZ"
+          "format": "yyyy-MM-dd HH:mm:ss.SSSSSS"
         }
       }
     }

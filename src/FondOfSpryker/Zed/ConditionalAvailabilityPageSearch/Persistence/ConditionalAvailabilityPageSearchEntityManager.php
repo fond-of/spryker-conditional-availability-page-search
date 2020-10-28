@@ -19,10 +19,14 @@ class ConditionalAvailabilityPageSearchEntityManager extends AbstractEntityManag
     public function deleteConditionalAvailabilityPeriodSearchPagesByConditionalAvailabilityIds(
         array $conditionalAvailabilityIds
     ): void {
-        $this->getFactory()
+        $conditionalAvailabilityPeriodPageSearchEntities = $this->getFactory()
             ->createConditionalAvailabilityPeriodPageSearchQuery()
             ->filterByFkConditionalAvailability_In($conditionalAvailabilityIds)
-            ->delete();
+            ->find();
+
+        foreach ($conditionalAvailabilityPeriodPageSearchEntities as $conditionalAvailabilityPeriodPageSearchEntity) {
+            $conditionalAvailabilityPeriodPageSearchEntity->delete();
+        }
     }
 
     /**

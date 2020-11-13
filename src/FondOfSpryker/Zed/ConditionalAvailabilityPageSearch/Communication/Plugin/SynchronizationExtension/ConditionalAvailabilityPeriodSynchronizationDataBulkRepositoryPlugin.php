@@ -95,6 +95,6 @@ class ConditionalAvailabilityPeriodSynchronizationDataBulkRepositoryPlugin exten
      */
     public function getSynchronizationQueuePoolName(): ?string
     {
-        $this->getConfig()->getConditionalAvailabilityPeriodSynchronizationPoolName();
+        return $this->getConfig()->getConditionalAvailabilityPeriodSynchronizationPoolName();
     }
 }

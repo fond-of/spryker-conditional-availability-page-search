@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business\Model;
 
+use DateTime;
 use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface;
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer;
 
@@ -20,6 +21,11 @@ class ConditionalAvailabilityPeriodPageSearchExpander implements ConditionalAvai
     protected $conditionalAvailabilityPeriodPageDataExpanderPlugins;
 
     /**
+     * @var \DateTime
+     */
+    protected $currentDateTime;
+
+    /**
      * @param \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface $storeFacade
      * @param \FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface[] $conditionalAvailabilityPeriodPageDataExpanderPlugins
      */
@@ -29,6 +35,7 @@ class ConditionalAvailabilityPeriodPageSearchExpander implements ConditionalAvai
     ) {
         $this->storeFacade = $storeFacade;
         $this->conditionalAvailabilityPeriodPageDataExpanderPlugins = $conditionalAvailabilityPeriodPageDataExpanderPlugins;
+        $this->currentDateTime = new DateTime();
     }
 
     public function expand(
@@ -59,9 +66,10 @@ class ConditionalAvailabilityPeriodPageSearchExpander implements ConditionalAvai
         ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransfer
     ): ConditionalAvailabilityPeriodPageSearchTransfer {
         $concatenatedStartAndEndDate = sprintf(
-            '%s - %s',
+            '%s - %s - %s',
             $conditionalAvailabilityPeriodPageSearchTransfer->getStartAt(),
-            $conditionalAvailabilityPeriodPageSearchTransfer->getEndAt()
+            $conditionalAvailabilityPeriodPageSearchTransfer->getEndAt(),
+            $this->currentDateTime->format('Y-m-d H:i:s')
         );
 
         $conditionalAvailabilityPeriodKey = implode(static::KEY_SEPARATOR, [

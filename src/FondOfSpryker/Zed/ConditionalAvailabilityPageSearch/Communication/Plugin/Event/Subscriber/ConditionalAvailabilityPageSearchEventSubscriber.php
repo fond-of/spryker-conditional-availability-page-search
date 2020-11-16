@@ -24,33 +24,14 @@ class ConditionalAvailabilityPageSearchEventSubscriber extends AbstractPlugin im
      */
     public function getSubscribedEvents(EventCollectionInterface $eventCollection)
     {
-        $this->addConditionalAvailabilityPublishListener($eventCollection);
         $this->addConditionalAvailabilityUnPublishListener($eventCollection);
-        $this->addConditionalAvailabilityCreateListener($eventCollection);
         $this->addConditionalAvailabilityDeleteListener($eventCollection);
-        $this->addConditionalAvailabilityUpdateListener($eventCollection);
 
         $this->addConditionalAvailabilityPeriodPublishListener($eventCollection);
-        $this->addConditionalAvailabilityPeriodUnPublishListener($eventCollection);
         $this->addConditionalAvailabilityPeriodCreateListener($eventCollection);
-        $this->addConditionalAvailabilityPeriodDeleteListener($eventCollection);
         $this->addConditionalAvailabilityPeriodUpdateListener($eventCollection);
 
         return $eventCollection;
-    }
-
-    /**
-     * @param \Spryker\Zed\Event\Dependency\EventCollectionInterface $eventCollection
-     *
-     * @return void
-     */
-    protected function addConditionalAvailabilityPublishListener(
-        EventCollectionInterface $eventCollection
-    ): void {
-        $eventCollection->addListenerQueued(
-            ConditionalAvailabilityEvents::CONDITIONAL_AVAILABILITY_PUBLISH,
-            new ConditionalAvailabilityPageSearchListener()
-        );
     }
 
     /**
@@ -63,34 +44,6 @@ class ConditionalAvailabilityPageSearchEventSubscriber extends AbstractPlugin im
     ): void {
         $eventCollection->addListenerQueued(
             ConditionalAvailabilityEvents::CONDITIONAL_AVAILABILITY_UNPUBLISH,
-            new ConditionalAvailabilityPageSearchListener()
-        );
-    }
-
-    /**
-     * @param \Spryker\Zed\Event\Dependency\EventCollectionInterface $eventCollection
-     *
-     * @return void
-     */
-    protected function addConditionalAvailabilityCreateListener(
-        EventCollectionInterface $eventCollection
-    ): void {
-        $eventCollection->addListenerQueued(
-            ConditionalAvailabilityEvents::ENTITY_FOS_CONDITIONAL_AVAILABILITY_CREATE,
-            new ConditionalAvailabilityPageSearchListener()
-        );
-    }
-
-    /**
-     * @param \Spryker\Zed\Event\Dependency\EventCollectionInterface $eventCollection
-     *
-     * @return void
-     */
-    protected function addConditionalAvailabilityUpdateListener(
-        EventCollectionInterface $eventCollection
-    ): void {
-        $eventCollection->addListenerQueued(
-            ConditionalAvailabilityEvents::ENTITY_FOS_CONDITIONAL_AVAILABILITY_UPDATE,
             new ConditionalAvailabilityPageSearchListener()
         );
     }
@@ -128,20 +81,6 @@ class ConditionalAvailabilityPageSearchEventSubscriber extends AbstractPlugin im
      *
      * @return void
      */
-    protected function addConditionalAvailabilityPeriodUnPublishListener(
-        EventCollectionInterface $eventCollection
-    ): void {
-        $eventCollection->addListenerQueued(
-            ConditionalAvailabilityEvents::CONDITIONAL_AVAILABILITY_PERIOD_UNPUBLISH,
-            new ConditionalAvailabilityPeriodPageSearchListener()
-        );
-    }
-
-    /**
-     * @param \Spryker\Zed\Event\Dependency\EventCollectionInterface $eventCollection
-     *
-     * @return void
-     */
     protected function addConditionalAvailabilityPeriodCreateListener(
         EventCollectionInterface $eventCollection
     ): void {
@@ -161,20 +100,6 @@ class ConditionalAvailabilityPageSearchEventSubscriber extends AbstractPlugin im
     ): void {
         $eventCollection->addListenerQueued(
             ConditionalAvailabilityEvents::ENTITY_FOS_CONDITIONAL_AVAILABILITY_PERIOD_UPDATE,
-            new ConditionalAvailabilityPeriodPageSearchListener()
-        );
-    }
-
-    /**
-     * @param \Spryker\Zed\Event\Dependency\EventCollectionInterface $eventCollection
-     *
-     * @return void
-     */
-    protected function addConditionalAvailabilityPeriodDeleteListener(
-        EventCollectionInterface $eventCollection
-    ): void {
-        $eventCollection->addListenerQueued(
-            ConditionalAvailabilityEvents::ENTITY_FOS_CONDITIONAL_AVAILABILITY_PERIOD_DELETE,
             new ConditionalAvailabilityPeriodPageSearchListener()
         );
     }

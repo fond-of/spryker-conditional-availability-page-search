@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Plugin\SearchExtension;
 
+use DateTime;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Range;
@@ -30,7 +31,7 @@ class EndAtConditionalAvailabilityPageSearchQueryExpanderPlugin extends Abstract
             return $searchQuery;
         }
 
-        $endAt = $requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_END_AT];
+        $endAt = new DateTime($requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_END_AT]);
         $boolQuery = $this->getBoolQuery($searchQuery->getSearchQuery());
 
         $endAtRange = (new Range())->addField(

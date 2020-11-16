@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Plugin\SearchExtension;
 
+use DateTime;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Range;
@@ -30,7 +31,7 @@ class StartAtConditionalAvailabilityPageSearchQueryExpanderPlugin extends Abstra
             return $searchQuery;
         }
 
-        $startAt = $requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_START_AT];
+        $startAt = new DateTime($requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_START_AT]);
         $boolQuery = $this->getBoolQuery($searchQuery->getSearchQuery());
 
         $startAtRange = (new Range())->addField(

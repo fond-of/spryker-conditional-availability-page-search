@@ -27,7 +27,7 @@ class IsAccessibleConditionalAvailabilityPageSearchQueryExpanderPlugin extends A
     {
         $customerTransfer = $this->getCustomer();
 
-        if ($customerTransfer === null) {
+        if ($customerTransfer === null || $customerTransfer->getHasAvailabilityRestrictions() !== true) {
             return $searchQuery;
         }
 

@@ -35,6 +35,14 @@ class ConditionalAvailabilityPeriodPageSearchListener extends AbstractPlugin imp
                 FosConditionalAvailabilityPeriodTableMap::COL_FK_CONDITIONAL_AVAILABILITY
             );
 
+        if (empty($conditionalAvailabilityIds)) {
+            $conditionalAvailabilityIds = $this->getFactory()
+                ->getEventBehaviorFacade()
+                ->getEventTransferIds(
+                    $eventTransfers
+                );
+        }
+
         if (
             $eventName === ConditionalAvailabilityEvents::ENTITY_FOS_CONDITIONAL_AVAILABILITY_PERIOD_DELETE ||
             $eventName === ConditionalAvailabilityEvents::CONDITIONAL_AVAILABILITY_PERIOD_UNPUBLISH

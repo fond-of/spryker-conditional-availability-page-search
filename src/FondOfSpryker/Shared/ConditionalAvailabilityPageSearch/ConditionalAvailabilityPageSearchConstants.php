@@ -12,5 +12,4 @@ interface ConditionalAvailabilityPageSearchConstants
     public const PARAMETER_END_AT = 'end-at';
     public const PARAMETER_START_AT = 'start-at';
     public const PARAMETER_WAREHOUSE_GROUP = 'warehouse';
-    public const PARAMETER_SORT = 'sort';
 }

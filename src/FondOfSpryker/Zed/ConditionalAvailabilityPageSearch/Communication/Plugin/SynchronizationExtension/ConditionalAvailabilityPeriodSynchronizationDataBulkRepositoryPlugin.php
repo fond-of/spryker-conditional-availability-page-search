@@ -5,6 +5,7 @@ namespace FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Communication\Plug
 use FondOfSpryker\Shared\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchConstants;
 use Generated\Shared\Transfer\FilterTransfer;
 use Generated\Shared\Transfer\SynchronizationDataTransfer;
+use Orm\Zed\ConditionalAvailabilityPageSearch\Persistence\Map\FosConditionalAvailabilityPeriodPageSearchTableMap;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use Spryker\Zed\SynchronizationExtension\Dependency\Plugin\SynchronizationDataBulkRepositoryPluginInterface;
 
@@ -55,7 +56,8 @@ class ConditionalAvailabilityPeriodSynchronizationDataBulkRepositoryPlugin exten
     {
         return (new FilterTransfer())
             ->setOffset($offset)
-            ->setLimit($limit);
+            ->setLimit($limit)
+            ->setOrderBy(FosConditionalAvailabilityPeriodPageSearchTableMap::COL_FK_CONDITIONAL_AVAILABILITY);
     }
 
     /**

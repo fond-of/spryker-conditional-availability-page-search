@@ -4,7 +4,7 @@ namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Plugin\SearchEx
 
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
-use Elastica\Query\Term;
+use Elastica\Query\Terms;
 use FondOfSpryker\Shared\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchConstants;
 use Generated\Shared\Search\ConditionalAvailabilityPeriodIndexMap;
 use InvalidArgumentException;
@@ -30,14 +30,14 @@ class SkuConditionalAvailabilityPageSearchQueryExpanderPlugin extends AbstractPl
             return $searchQuery;
         }
 
-        $sku = $requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_SKU];
+        $skus = $requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_SKU];
 
-        $skuTerm = (new Term())->setTerm(
-            ConditionalAvailabilityPeriodIndexMap::SKU,
-            $sku
-        );
+        if (!is_array($skus) || count($skus) === 0) {
+            return $searchQuery;
+        }
 
-        $this->getBoolQuery($searchQuery->getSearchQuery())->addMust($skuTerm);
+        $this->getBoolQuery($searchQuery->getSearchQuery())
+            ->addMust(new Terms(ConditionalAvailabilityPeriodIndexMap::SKU, $skus));
 
         return $searchQuery;
     }

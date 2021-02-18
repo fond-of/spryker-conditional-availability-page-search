@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Plugin\SearchExtension;
 
+use Elastica\Aggregation\Cardinality;
 use Elastica\Collapse;
 use Elastica\Query;
 use FondOfSpryker\Shared\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchConstants;
@@ -14,6 +15,8 @@ use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 class OnePerSkuConditionalAvailabilityPageSearchQueryExpanderPlugin extends AbstractPlugin implements
     QueryExpanderPluginInterface
 {
+    protected const AGGREGATION_NAME_TOTAL_COLLAPSED_HITS = 'total_collapsed_hits';
+
     /**
      * {@inheritDoc}
      *
@@ -46,6 +49,11 @@ class OnePerSkuConditionalAvailabilityPageSearchQueryExpanderPlugin extends Abst
 
         $query->setCollapse(
             (new Collapse())->setFieldname(ConditionalAvailabilityPeriodIndexMap::SKU)
+        );
+
+        $query->addAggregation(
+            (new Cardinality(static::AGGREGATION_NAME_TOTAL_COLLAPSED_HITS))
+                ->setField(ConditionalAvailabilityPeriodIndexMap::SKU)
         );
 
         return $searchQuery;

@@ -5,7 +5,7 @@ namespace FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business\Model;
 interface ConditionalAvailabilityPeriodPageSearchPublisherInterface
 {
     /**
-     * @param int[] $conditionalAvailabilityIds
+     * @param array<int> $conditionalAvailabilityIds
      *
      * @return void
      */

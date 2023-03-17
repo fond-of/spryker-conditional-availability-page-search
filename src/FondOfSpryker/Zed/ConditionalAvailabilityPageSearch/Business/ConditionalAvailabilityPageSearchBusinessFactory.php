@@ -33,7 +33,7 @@ class ConditionalAvailabilityPageSearchBusinessFactory extends AbstractBusinessF
             $this->getEntityManager(),
             $this->createConditionalAvailabilityPeriodPageSearchExpander(),
             $this->getUtilEncodingService(),
-            $this->createConditionalAvailabilityPeriodPageSearchDataMapper()
+            $this->createConditionalAvailabilityPeriodPageSearchDataMapper(),
         );
     }
 
@@ -52,7 +52,7 @@ class ConditionalAvailabilityPageSearchBusinessFactory extends AbstractBusinessF
     {
         return new ConditionalAvailabilityPeriodPageSearchDataMapper(
             $this->getStoreFacade(),
-            $this->getConditionalAvailabilityPeriodPageSearchDataExpanderPlugins()
+            $this->getConditionalAvailabilityPeriodPageSearchDataExpanderPlugins(),
         );
     }
 
@@ -63,7 +63,7 @@ class ConditionalAvailabilityPageSearchBusinessFactory extends AbstractBusinessF
     {
         return new ConditionalAvailabilityPeriodPageSearchExpander(
             $this->getStoreFacade(),
-            $this->getConditionalAvailabilityPeriodPageDataExpanderPlugins()
+            $this->getConditionalAvailabilityPeriodPageDataExpanderPlugins(),
         );
     }
 
@@ -84,7 +84,7 @@ class ConditionalAvailabilityPageSearchBusinessFactory extends AbstractBusinessF
     }
 
     /**
-     * @return \FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface[]
+     * @return array<\FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface>
      */
     protected function getConditionalAvailabilityPeriodPageDataExpanderPlugins(): array
     {
@@ -92,7 +92,7 @@ class ConditionalAvailabilityPageSearchBusinessFactory extends AbstractBusinessF
     }
 
     /**
-     * @return \FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface[]
+     * @return array<\FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface>
      */
     protected function getConditionalAvailabilityPeriodPageSearchDataExpanderPlugins(): array
     {

@@ -16,9 +16,9 @@ class ConditionalAvailabilityPageSearchFacade extends AbstractFacade implements 
      *
      * @api
      *
-     * @param int[] $concreteIds
+     * @param array<int> $concreteIds
      *
-     * @return int[]
+     * @return array<int>
      */
     public function getConditionalAvailabilityIdsByConcreteIds(array $concreteIds): array
     {

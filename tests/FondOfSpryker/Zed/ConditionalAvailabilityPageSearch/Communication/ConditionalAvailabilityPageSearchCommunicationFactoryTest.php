@@ -67,7 +67,7 @@ class ConditionalAvailabilityPageSearchCommunicationFactoryTest extends Unit
 
         $this->assertInstanceOf(
             ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge::class,
-            $this->conditionalAvailabilityPageSearchCommunicationFactory->getEventBehaviorFacade()
+            $this->conditionalAvailabilityPageSearchCommunicationFactory->getEventBehaviorFacade(),
         );
     }
 }

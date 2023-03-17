@@ -65,8 +65,8 @@ class ConditionalAvailabilityPageSearchFacadeTest extends Unit
     {
         $this->assertIsArray(
             $this->conditionalAvailabilityPageSearchFacade->getConditionalAvailabilityIdsByConcreteIds(
-                $this->concreteIds
-            )
+                $this->concreteIds,
+            ),
         );
     }
 
@@ -80,7 +80,7 @@ class ConditionalAvailabilityPageSearchFacadeTest extends Unit
             ->willReturn($this->conditionalAvailabilityPeriodPageSearchPublisherInterfaceMock);
 
         $this->conditionalAvailabilityPageSearchFacade->publish(
-            $this->concreteIds
+            $this->concreteIds,
         );
     }
 
@@ -94,7 +94,7 @@ class ConditionalAvailabilityPageSearchFacadeTest extends Unit
             ->willReturn($this->conditionalAvailabilityPeriodPageSearchUnpublisherInterfaceMock);
 
         $this->conditionalAvailabilityPageSearchFacade->unpublish(
-            $this->concreteIds
+            $this->concreteIds,
         );
     }
 }

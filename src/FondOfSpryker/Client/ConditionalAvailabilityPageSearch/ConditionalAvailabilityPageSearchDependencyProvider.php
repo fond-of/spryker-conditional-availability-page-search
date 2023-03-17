@@ -10,10 +10,29 @@ use Spryker\Client\Kernel\Container;
 
 class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const CLIENT_CUSTOMER = 'CLIENT_CUSTOMER';
+
+    /**
+     * @var string
+     */
     public const CLIENT_SEARCH = 'CLIENT_SEARCH';
+
+    /**
+     * @var string
+     */
     public const PLUGIN_SEARCH_QUERY = 'PLUGIN_SEARCH_QUERY';
+
+    /**
+     * @var string
+     */
     public const PLUGINS_SEARCH_QUERY_EXPANDER = 'PLUGINS_SEARCH_QUERY_EXPANDER';
+
+    /**
+     * @var string
+     */
     public const PLUGINS_SEARCH_RESULT_FORMATTER = 'PLUGINS_SEARCH_RESULT_FORMATTER';
 
     /**
@@ -43,7 +62,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractDepend
     {
         $container[static::CLIENT_CUSTOMER] = static function (Container $container) {
             return new ConditionalAvailabilityPageSearchToCustomerClientBridge(
-                $container->getLocator()->customer()->client()
+                $container->getLocator()->customer()->client(),
             );
         };
 
@@ -59,7 +78,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractDepend
     {
         $container[static::CLIENT_SEARCH] = static function (Container $container) {
             return new ConditionalAvailabilityPageSearchToSearchClientBridge(
-                $container->getLocator()->search()->client()
+                $container->getLocator()->search()->client(),
             );
         };
 
@@ -113,7 +132,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractDepend
     }
 
     /**
-     * @return \Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface[]
+     * @return array<\Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface>
      */
     protected function getQueryExpanderPlugins(): array
     {
@@ -121,7 +140,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractDepend
     }
 
     /**
-     * @return \Spryker\Client\Search\Dependency\Plugin\ResultFormatterPluginInterface[]
+     * @return array<\Spryker\Client\Search\Dependency\Plugin\ResultFormatterPluginInterface>
      */
     protected function getResultFormatterPlugins(): array
     {

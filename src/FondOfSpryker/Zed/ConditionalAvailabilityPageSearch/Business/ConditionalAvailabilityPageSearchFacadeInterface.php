@@ -10,9 +10,9 @@ interface ConditionalAvailabilityPageSearchFacadeInterface
      *
      * @api
      *
-     * @param int[] $concreteIds
+     * @param array<int> $concreteIds
      *
-     * @return int[]
+     * @return array<int>
      */
     public function getConditionalAvailabilityIdsByConcreteIds(array $concreteIds): array;
 
@@ -25,7 +25,7 @@ interface ConditionalAvailabilityPageSearchFacadeInterface
      *
      * @api
      *
-     * @param int[] $conditionalAvailabilityIds
+     * @param array<int> $conditionalAvailabilityIds
      *
      * @return void
      */
@@ -36,7 +36,7 @@ interface ConditionalAvailabilityPageSearchFacadeInterface
      * - Finds and deletes conditional availability period search entities based on these ids
      * - Sends delete message to queue based on module config
      *
-     * @param int[] $conditionalAvailabilityIds
+     * @param array<int> $conditionalAvailabilityIds
      *
      * @return void
      */

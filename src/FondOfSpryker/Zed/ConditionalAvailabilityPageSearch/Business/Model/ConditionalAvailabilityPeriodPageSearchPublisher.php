@@ -57,7 +57,7 @@ class ConditionalAvailabilityPeriodPageSearchPublisher implements ConditionalAva
     }
 
     /**
-     * @param int[] $conditionalAvailabilityIds
+     * @param array<int> $conditionalAvailabilityIds
      *
      * @return void
      */
@@ -65,13 +65,13 @@ class ConditionalAvailabilityPeriodPageSearchPublisher implements ConditionalAva
     {
         $fosConditionalAvailabilityPeriodEntities = $this->queryContainer
             ->queryConditionalAvailabilityPeriodsWithConditionalAvailabilityAndProductByConditionalAvailabilityIds(
-                $conditionalAvailabilityIds
+                $conditionalAvailabilityIds,
             )->find()
             ->getData();
 
         if (count($fosConditionalAvailabilityPeriodEntities) > 0) {
             $this->entityManager->deleteConditionalAvailabilityPeriodSearchPagesByConditionalAvailabilityIds(
-                $conditionalAvailabilityIds
+                $conditionalAvailabilityIds,
             );
         }
 
@@ -79,7 +79,7 @@ class ConditionalAvailabilityPeriodPageSearchPublisher implements ConditionalAva
     }
 
     /**
-     * @param \Orm\Zed\ConditionalAvailability\Persistence\Base\FosConditionalAvailabilityPeriod[] $fosConditionalAvailabilityPeriodEntities
+     * @param array<\Orm\Zed\ConditionalAvailability\Persistence\Base\FosConditionalAvailabilityPeriod> $fosConditionalAvailabilityPeriodEntities
      *
      * @return void
      */
@@ -107,11 +107,11 @@ class ConditionalAvailabilityPeriodPageSearchPublisher implements ConditionalAva
             ->expand($conditionalAvailabilityPeriodPageSearchTransfer);
 
          $conditionalAvailabilityPeriodPageSearchTransfer = $this->addDataAttributes(
-             $conditionalAvailabilityPeriodPageSearchTransfer
+             $conditionalAvailabilityPeriodPageSearchTransfer,
          );
 
         $this->entityManager->createConditionalAvailabilityPeriodPageSearch(
-            $conditionalAvailabilityPeriodPageSearchTransfer
+            $conditionalAvailabilityPeriodPageSearchTransfer,
         );
     }
 
@@ -125,7 +125,7 @@ class ConditionalAvailabilityPeriodPageSearchPublisher implements ConditionalAva
     ): ConditionalAvailabilityPeriodPageSearchTransfer {
         $data = array_merge(
             $conditionalAvailabilityPeriodPageSearchTransfer->toArray(),
-            $conditionalAvailabilityPeriodPageSearchTransfer->getData()
+            $conditionalAvailabilityPeriodPageSearchTransfer->getData(),
         );
 
         $data = $this->conditionalAvailabilityPeriodPageSearchDataMapper

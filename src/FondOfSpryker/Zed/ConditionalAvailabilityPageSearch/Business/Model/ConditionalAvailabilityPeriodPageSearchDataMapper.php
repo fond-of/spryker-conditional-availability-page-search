@@ -7,19 +7,69 @@ use Generated\Shared\Search\ConditionalAvailabilityPeriodIndexMap;
 
 class ConditionalAvailabilityPeriodPageSearchDataMapper implements ConditionalAvailabilityPeriodPageSearchDataMapperInterface
 {
+    /**
+     * @var string
+     */
     protected const DATA_KEY_SKU = 'sku';
+
+    /**
+     * @var string
+     */
     protected const DATA_KEY_QUANTITY = 'quantity';
+
+    /**
+     * @var string
+     */
     protected const DATA_KEY_WAREHOUSE_GROUP = 'warehouse_group';
+
+    /**
+     * @var string
+     */
     protected const DATA_KEY_START_AT = 'start_at';
+
+    /**
+     * @var string
+     */
     protected const DATA_KEY_END_AT = 'end_at';
+
+    /**
+     * @var string
+     */
     protected const DATA_KEY_IS_ACCESSIBLE = 'is_accessible';
+
+    /**
+     * @var string
+     */
     protected const DATA_KEY_STORE = 'store';
 
+    /**
+     * @var string
+     */
     protected const SEARCH_RESULT_DATA_KEY_SKU = 'sku';
+
+    /**
+     * @var string
+     */
     protected const SEARCH_RESULT_DATA_KEY_QUANTITY = 'quantity';
+
+    /**
+     * @var string
+     */
     protected const SEARCH_RESULT_DATA_KEY_WAREHOUSE_GROUP = 'warehouse_group';
+
+    /**
+     * @var string
+     */
     protected const SEARCH_RESULT_DATA_KEY_START_AT = 'start_at';
+
+    /**
+     * @var string
+     */
     protected const SEARCH_RESULT_DATA_KEY_END_AT = 'end_at';
+
+    /**
+     * @var string
+     */
     protected const SEARCH_RESULT_DATA_KEY_IS_ACCESSIBLE = 'is_accessible';
 
     /**
@@ -28,13 +78,13 @@ class ConditionalAvailabilityPeriodPageSearchDataMapper implements ConditionalAv
     protected $storeFacade;
 
     /**
-     * @var \FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface[]
+     * @var array<\FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface>
      */
     protected $conditionalAvailabilityPeriodPageSearchDataExpanderPlugins;
 
     /**
      * @param \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface $storeFacade
-     * @param \FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface[] $conditionalAvailabilityPeriodPageSearchDataExpanderPlugins
+     * @param array<\FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface> $conditionalAvailabilityPeriodPageSearchDataExpanderPlugins
      */
     public function __construct(
         ConditionalAvailabilityPageSearchToStoreFacadeInterface $storeFacade,

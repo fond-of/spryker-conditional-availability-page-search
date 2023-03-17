@@ -13,13 +13,28 @@ use Spryker\Zed\Kernel\Persistence\AbstractQueryContainer;
  */
 class ConditionalAvailabilityPageSearchQueryContainer extends AbstractQueryContainer implements ConditionalAvailabilityPageSearchQueryContainerInterface
 {
+    /**
+     * @var string
+     */
     public const VIRTUAL_COLUMN_SKU = 'sku';
+
+    /**
+     * @var string
+     */
     public const VIRTUAL_COLUMN_FK_PRODUCT = 'fk_product';
+
+    /**
+     * @var string
+     */
     public const VIRTUAL_COLUMN_WAREHOUSE_GROUP = 'warehouse_group';
+
+    /**
+     * @var string
+     */
     public const VIRTUAL_COLUMN_IS_ACCESSIBLE = 'is_accessible';
 
     /**
-     * @param int[] $conditionalAvailabilityIds
+     * @param array<int> $conditionalAvailabilityIds
      *
      * @return \Orm\Zed\ConditionalAvailability\Persistence\FosConditionalAvailabilityPeriodQuery
      */
@@ -33,26 +48,26 @@ class ConditionalAvailabilityPageSearchQueryContainer extends AbstractQueryConta
             ->endUse()
             ->withColumn(
                 SpyProductTableMap::COL_SKU,
-                static::VIRTUAL_COLUMN_SKU
+                static::VIRTUAL_COLUMN_SKU,
             )
             ->withColumn(
                 FosConditionalAvailabilityTableMap::COL_FK_PRODUCT,
-                static::VIRTUAL_COLUMN_FK_PRODUCT
+                static::VIRTUAL_COLUMN_FK_PRODUCT,
             )
             ->withColumn(
                 FosConditionalAvailabilityTableMap::COL_WAREHOUSE_GROUP,
-                static::VIRTUAL_COLUMN_WAREHOUSE_GROUP
+                static::VIRTUAL_COLUMN_WAREHOUSE_GROUP,
             )
             ->withColumn(
                 FosConditionalAvailabilityTableMap::COL_IS_ACCESSIBLE,
-                static::VIRTUAL_COLUMN_IS_ACCESSIBLE
+                static::VIRTUAL_COLUMN_IS_ACCESSIBLE,
             );
 
         return $fosConditionalAvailabilityPeriodQuery;
     }
 
     /**
-     * @param int[] $conditionalAvailabilityIds
+     * @param array<int> $conditionalAvailabilityIds
      *
      * @return \Orm\Zed\ConditionalAvailability\Persistence\FosConditionalAvailabilityPeriodQuery
      */
@@ -63,17 +78,17 @@ class ConditionalAvailabilityPageSearchQueryContainer extends AbstractQueryConta
             ->getConditionalAvailabilityPeriodPropelQuery()
             ->clear();
 
-        if (empty($conditionalAvailabilityIds)) {
+        if (!$conditionalAvailabilityIds) {
             return $fosConditionalAvailabilityPeriodQuery;
         }
 
         return $fosConditionalAvailabilityPeriodQuery->filterByFkConditionalAvailability_In(
-            $conditionalAvailabilityIds
+            $conditionalAvailabilityIds,
         );
     }
 
     /**
-     * @param int[] $conditionalAvailabilityIds
+     * @param array<int> $conditionalAvailabilityIds
      *
      * @return \Orm\Zed\ConditionalAvailability\Persistence\FosConditionalAvailabilityQuery
      */
@@ -83,12 +98,12 @@ class ConditionalAvailabilityPageSearchQueryContainer extends AbstractQueryConta
         $fosConditionalAvailabilityQuery = $this->getFactory()->getConditionalAvailabilityPropelQuery()
             ->clear();
 
-        if (empty($conditionalAvailabilityIds)) {
+        if (!$conditionalAvailabilityIds) {
             return $fosConditionalAvailabilityQuery;
         }
 
         return $fosConditionalAvailabilityQuery->filterByIdConditionalAvailability_In(
-            $conditionalAvailabilityIds
+            $conditionalAvailabilityIds,
         );
     }
 }

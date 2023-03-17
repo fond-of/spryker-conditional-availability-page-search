@@ -14,6 +14,9 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class ConditionalAvailabilityPageSearchPublishConsole extends Console
 {
+    /**
+     * @var string
+     */
     public const COMMAND_NAME = 'conditional-availability-page-search:publish';
 
     /**

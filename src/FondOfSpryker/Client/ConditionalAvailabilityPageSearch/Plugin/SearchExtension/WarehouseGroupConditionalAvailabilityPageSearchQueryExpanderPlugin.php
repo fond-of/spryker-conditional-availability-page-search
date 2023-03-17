@@ -34,7 +34,7 @@ class WarehouseGroupConditionalAvailabilityPageSearchQueryExpanderPlugin extends
 
         $warehouseGroupTerm = (new Term())->setTerm(
             ConditionalAvailabilityPeriodIndexMap::WAREHOUSE_GROUP,
-            $warehouseGroup
+            $warehouseGroup,
         );
 
         $this->getBoolQuery($searchQuery->getSearchQuery())->addMust($warehouseGroupTerm);
@@ -56,7 +56,7 @@ class WarehouseGroupConditionalAvailabilityPageSearchQueryExpanderPlugin extends
             throw new InvalidArgumentException(sprintf(
                 'Localized query expander available only with %s, got: %s',
                 BoolQuery::class,
-                get_class($boolQuery)
+                get_class($boolQuery),
             ));
         }
 

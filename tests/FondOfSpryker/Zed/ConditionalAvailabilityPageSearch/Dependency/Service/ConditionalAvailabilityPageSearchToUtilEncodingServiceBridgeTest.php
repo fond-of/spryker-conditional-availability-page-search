@@ -23,11 +23,6 @@ class ConditionalAvailabilityPageSearchToUtilEncodingServiceBridgeTest extends U
     protected $encodedJsonString;
 
     /**
-     * @var string
-     */
-    protected $value;
-
-    /**
      * @return void
      */
     protected function _before(): void
@@ -37,8 +32,6 @@ class ConditionalAvailabilityPageSearchToUtilEncodingServiceBridgeTest extends U
             ->getMock();
 
         $this->encodedJsonString = 'encoded-json-string';
-
-        $this->value = [];
 
         $this->conditionalAvailabilityPageSearchToUtilEncodingServiceBridge = new ConditionalAvailabilityPageSearchToUtilEncodingServiceBridge(
             $this->utilEncodingServiceInterfaceMock,
@@ -52,13 +45,13 @@ class ConditionalAvailabilityPageSearchToUtilEncodingServiceBridgeTest extends U
     {
         $this->utilEncodingServiceInterfaceMock->expects($this->atLeastOnce())
             ->method('encodeJson')
-            ->with($this->value)
+            ->with([])
             ->willReturn($this->encodedJsonString);
 
         $this->assertSame(
             $this->encodedJsonString,
             $this->conditionalAvailabilityPageSearchToUtilEncodingServiceBridge->encodeJson(
-                $this->value,
+                [],
             ),
         );
     }
@@ -71,7 +64,7 @@ class ConditionalAvailabilityPageSearchToUtilEncodingServiceBridgeTest extends U
         $this->utilEncodingServiceInterfaceMock->expects($this->atLeastOnce())
             ->method('decodeJson')
             ->with($this->encodedJsonString)
-            ->willReturn($this->value);
+            ->willReturn([]);
 
         $this->assertIsArray(
             $this->conditionalAvailabilityPageSearchToUtilEncodingServiceBridge->decodeJson(

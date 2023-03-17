@@ -3,8 +3,8 @@
 namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Dependency\Client;
 
 use Codeception\Test\Unit;
-use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
 use Spryker\Client\Search\SearchClientInterface;
+use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 
 class ConditionalAvailabilityPageSearchToSearchClientBridgeTest extends Unit
 {
@@ -19,7 +19,7 @@ class ConditionalAvailabilityPageSearchToSearchClientBridgeTest extends Unit
     protected $searchClientInterfaceMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Search\Dependency\Plugin\QueryInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
      */
     protected $queryInterfaceMock;
 

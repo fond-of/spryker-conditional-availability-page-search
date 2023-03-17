@@ -3,8 +3,8 @@
 namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Dependency\Client;
 
 use Codeception\Test\Unit;
-use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 use Spryker\Client\Search\SearchClientInterface;
+use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 
 class ConditionalAvailabilityPageSearchToSearchClientBridgeTest extends Unit
 {

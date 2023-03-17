@@ -35,7 +35,7 @@ class MinQtyConditionalAvailabilityPageSearchQueryExpanderPlugin extends Abstrac
 
         $range = (new Range())->addField(
             ConditionalAvailabilityPeriodIndexMap::QUANTITY,
-            ['gte' => $minQty]
+            ['gte' => $minQty],
         );
 
         $this->getBoolQuery($searchQuery->getSearchQuery())
@@ -70,8 +70,8 @@ class MinQtyConditionalAvailabilityPageSearchQueryExpanderPlugin extends Abstrac
                 sprintf(
                     'Localized query expander available only with %s, got: %s',
                     BoolQuery::class,
-                    get_class($boolQuery)
-                )
+                    get_class($boolQuery),
+                ),
             );
         }
 

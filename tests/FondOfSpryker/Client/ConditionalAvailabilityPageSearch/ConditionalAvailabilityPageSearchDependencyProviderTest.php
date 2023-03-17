@@ -37,8 +37,8 @@ class ConditionalAvailabilityPageSearchDependencyProviderTest extends Unit
         $this->assertInstanceOf(
             Container::class,
             $this->conditionalAvailabilityPageSearchDependencyProvider->provideServiceLayerDependencies(
-                $this->containerMock
-            )
+                $this->containerMock,
+            ),
         );
     }
 }

@@ -15,6 +15,9 @@ use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 class OnePerSkuConditionalAvailabilityPageSearchQueryExpanderPlugin extends AbstractPlugin implements
     QueryExpanderPluginInterface
 {
+    /**
+     * @var string
+     */
     protected const AGGREGATION_NAME_TOTAL_COLLAPSED_HITS = 'total_collapsed_hits';
 
     /**
@@ -42,18 +45,18 @@ class OnePerSkuConditionalAvailabilityPageSearchQueryExpanderPlugin extends Abst
                 sprintf(
                     'Query expander available only with %s, got: %s',
                     Query::class,
-                    get_class($query)
-                )
+                    get_class($query),
+                ),
             );
         }
 
         $query->setCollapse(
-            (new Collapse())->setFieldname(ConditionalAvailabilityPeriodIndexMap::SKU)
+            (new Collapse())->setFieldname(ConditionalAvailabilityPeriodIndexMap::SKU),
         );
 
         $query->addAggregation(
             (new Cardinality(static::AGGREGATION_NAME_TOTAL_COLLAPSED_HITS))
-                ->setField(ConditionalAvailabilityPeriodIndexMap::SKU)
+                ->setField(ConditionalAvailabilityPeriodIndexMap::SKU),
         );
 
         return $searchQuery;

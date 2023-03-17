@@ -21,7 +21,7 @@ class ConditionalAvailabilityPageSearchCommunicationFactory extends AbstractComm
     public function getEventBehaviorFacade(): ConditionalAvailabilityPageSearchToEventBehaviorFacadeInterface
     {
         return $this->getProvidedDependency(
-            ConditionalAvailabilityPageSearchDependencyProvider::FACADE_EVENT_BEHAVIOR
+            ConditionalAvailabilityPageSearchDependencyProvider::FACADE_EVENT_BEHAVIOR,
         );
     }
 }

@@ -8,6 +8,9 @@ use Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer;
 
 class ConditionalAvailabilityPeriodPageSearchExpander implements ConditionalAvailabilityPeriodPageSearchExpanderInterface
 {
+    /**
+     * @var string
+     */
     protected const KEY_SEPARATOR = ':';
 
     /**
@@ -16,7 +19,7 @@ class ConditionalAvailabilityPeriodPageSearchExpander implements ConditionalAvai
     protected $storeFacade;
 
     /**
-     * @var \FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface[]
+     * @var array<\FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface>
      */
     protected $conditionalAvailabilityPeriodPageDataExpanderPlugins;
 
@@ -27,7 +30,7 @@ class ConditionalAvailabilityPeriodPageSearchExpander implements ConditionalAvai
 
     /**
      * @param \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface $storeFacade
-     * @param \FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface[] $conditionalAvailabilityPeriodPageDataExpanderPlugins
+     * @param array<\FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface> $conditionalAvailabilityPeriodPageDataExpanderPlugins
      */
     public function __construct(
         ConditionalAvailabilityPageSearchToStoreFacadeInterface $storeFacade,
@@ -47,11 +50,11 @@ class ConditionalAvailabilityPeriodPageSearchExpander implements ConditionalAvai
         ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransfer
     ): ConditionalAvailabilityPeriodPageSearchTransfer {
         $conditionalAvailabilityPeriodPageSearchTransfer = $this->expandWithConditionalAvailabilityPeriodKey(
-            $conditionalAvailabilityPeriodPageSearchTransfer
+            $conditionalAvailabilityPeriodPageSearchTransfer,
         );
 
         $conditionalAvailabilityPeriodPageSearchTransfer = $this->expandWithStoreName(
-            $conditionalAvailabilityPeriodPageSearchTransfer
+            $conditionalAvailabilityPeriodPageSearchTransfer,
         );
 
         foreach ($this->conditionalAvailabilityPeriodPageDataExpanderPlugins as $conditionalAvailabilityPeriodPageDataExpanderPlugin) {
@@ -74,7 +77,7 @@ class ConditionalAvailabilityPeriodPageSearchExpander implements ConditionalAvai
             '%s - %s - %s',
             $conditionalAvailabilityPeriodPageSearchTransfer->getStartAt(),
             $conditionalAvailabilityPeriodPageSearchTransfer->getEndAt(),
-            $this->currentDateTime->format('Y-m-d H:i:s')
+            $this->currentDateTime->format('Y-m-d H:i:s'),
         );
 
         $conditionalAvailabilityPeriodKey = implode(static::KEY_SEPARATOR, [
@@ -84,7 +87,7 @@ class ConditionalAvailabilityPeriodPageSearchExpander implements ConditionalAvai
         ]);
 
         return $conditionalAvailabilityPeriodPageSearchTransfer->setConditionalAvailabilityPeriodKey(
-            $conditionalAvailabilityPeriodKey
+            $conditionalAvailabilityPeriodKey,
         );
     }
 
@@ -97,7 +100,7 @@ class ConditionalAvailabilityPeriodPageSearchExpander implements ConditionalAvai
         ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransfer
     ): ConditionalAvailabilityPeriodPageSearchTransfer {
         return $conditionalAvailabilityPeriodPageSearchTransfer->setStoreName(
-            $this->storeFacade->getCurrentStore()->getName()
+            $this->storeFacade->getCurrentStore()->getName(),
         );
     }
 }

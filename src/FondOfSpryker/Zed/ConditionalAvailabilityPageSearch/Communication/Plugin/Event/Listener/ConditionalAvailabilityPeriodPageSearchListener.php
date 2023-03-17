@@ -32,14 +32,14 @@ class ConditionalAvailabilityPeriodPageSearchListener extends AbstractPlugin imp
             ->getEventBehaviorFacade()
             ->getEventTransferForeignKeys(
                 $eventTransfers,
-                FosConditionalAvailabilityPeriodTableMap::COL_FK_CONDITIONAL_AVAILABILITY
+                FosConditionalAvailabilityPeriodTableMap::COL_FK_CONDITIONAL_AVAILABILITY,
             );
 
-        if (empty($conditionalAvailabilityIds)) {
+        if (!$conditionalAvailabilityIds) {
             $conditionalAvailabilityIds = $this->getFactory()
                 ->getEventBehaviorFacade()
                 ->getEventTransferIds(
-                    $eventTransfers
+                    $eventTransfers,
                 );
         }
 

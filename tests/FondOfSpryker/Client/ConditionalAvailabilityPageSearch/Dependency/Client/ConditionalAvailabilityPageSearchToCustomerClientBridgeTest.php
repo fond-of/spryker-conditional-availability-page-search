@@ -37,7 +37,7 @@ class ConditionalAvailabilityPageSearchToCustomerClientBridgeTest extends Unit
             ->getMock();
 
         $this->conditionalAvailabilityPageSearchToCustomerClientBridge = new ConditionalAvailabilityPageSearchToCustomerClientBridge(
-            $this->customerClientInterfaceMock
+            $this->customerClientInterfaceMock,
         );
     }
 
@@ -52,7 +52,7 @@ class ConditionalAvailabilityPageSearchToCustomerClientBridgeTest extends Unit
 
         $this->assertInstanceOf(
             CustomerTransfer::class,
-            $this->conditionalAvailabilityPageSearchToCustomerClientBridge->getCustomer()
+            $this->conditionalAvailabilityPageSearchToCustomerClientBridge->getCustomer(),
         );
     }
 }

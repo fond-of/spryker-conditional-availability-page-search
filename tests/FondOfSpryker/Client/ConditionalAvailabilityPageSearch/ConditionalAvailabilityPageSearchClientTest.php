@@ -89,8 +89,8 @@ class ConditionalAvailabilityPageSearchClientTest extends Unit
 
         $this->assertIsArray(
             $this->conditionalAvailabilityPageSearchClient->search(
-                $this->searchString
-            )
+                $this->searchString,
+            ),
         );
     }
 }

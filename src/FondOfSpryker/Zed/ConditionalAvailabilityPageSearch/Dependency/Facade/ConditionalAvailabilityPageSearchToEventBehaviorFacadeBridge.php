@@ -20,7 +20,7 @@ class ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge implements Co
     }
 
     /**
-     * @param \Generated\Shared\Transfer\EventEntityTransfer[] $eventTransfers
+     * @param array<\Generated\Shared\Transfer\EventEntityTransfer> $eventTransfers
      *
      * @return array
      */
@@ -30,7 +30,7 @@ class ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge implements Co
     }
 
     /**
-     * @param \Generated\Shared\Transfer\EventEntityTransfer[] $eventTransfers
+     * @param array<\Generated\Shared\Transfer\EventEntityTransfer> $eventTransfers
      * @param string $foreignKeyColumnName
      *
      * @return array
@@ -39,7 +39,7 @@ class ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge implements Co
     {
         return $this->eventBehaviorFacade->getEventTransferForeignKeys(
             $eventTransfers,
-            $foreignKeyColumnName
+            $foreignKeyColumnName,
         );
     }
 }

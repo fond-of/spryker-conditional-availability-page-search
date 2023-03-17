@@ -42,7 +42,7 @@ class ConditionalAvailabilityPeriodEventResourceQueryContainerPlugin extends Abs
     }
 
     /**
-     * @param int[] $ids
+     * @param array<int> $ids
      *
      * @return \Propel\Runtime\ActiveQuery\ModelCriteria|null
      */

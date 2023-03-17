@@ -18,7 +18,7 @@ class ConditionalAvailabilityPeriodPageSearchMapper implements ConditionalAvaila
         FosConditionalAvailabilityPeriodPageSearch $fosConditionalAvailabilityPeriodPageSearch
     ): FosConditionalAvailabilityPeriodPageSearch {
         $fosConditionalAvailabilityPeriodPageSearch->fromArray(
-            $conditionalAvailabilityPeriodPageSearchTransfer->modifiedToArray(false)
+            $conditionalAvailabilityPeriodPageSearchTransfer->modifiedToArray(false),
         );
 
         return $fosConditionalAvailabilityPeriodPageSearch;

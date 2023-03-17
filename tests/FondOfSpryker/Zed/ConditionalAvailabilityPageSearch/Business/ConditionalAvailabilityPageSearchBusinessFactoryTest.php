@@ -40,7 +40,7 @@ class ConditionalAvailabilityPageSearchBusinessFactoryTest extends Unit
     protected $conditionalAvailabilityPageSearchToStoreFacadeMock;
 
     /**
-     * @var \FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface[]
+     * @var array<\FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface>
      */
     protected $conditionalAvailabilityPeriodPageDataExpanderPluginMocks;
 
@@ -50,7 +50,7 @@ class ConditionalAvailabilityPageSearchBusinessFactoryTest extends Unit
     protected $conditionalAvailabilityPageSearchToUtilEncodingServiceMock;
 
     /**
-     * @var \FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface[]
+     * @var array<\FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface>
      */
     protected $conditionalAvailabilityPeriodPageSearchDataExpanderPluginMocks;
 
@@ -105,18 +105,18 @@ class ConditionalAvailabilityPageSearchBusinessFactoryTest extends Unit
                 [ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_DATA_EXPANDER],
                 [ConditionalAvailabilityPageSearchDependencyProvider::SERVICE_UTIL_ENCODING],
                 [ConditionalAvailabilityPageSearchDependencyProvider::FACADE_STORE],
-                [ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_SEARCH_DATA_EXPANDER]
+                [ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_SEARCH_DATA_EXPANDER],
             )->willReturnOnConsecutiveCalls(
                 $this->conditionalAvailabilityPageSearchToStoreFacadeMock,
                 $this->conditionalAvailabilityPeriodPageDataExpanderPluginMocks,
                 $this->conditionalAvailabilityPageSearchToUtilEncodingServiceMock,
                 $this->conditionalAvailabilityPageSearchToStoreFacadeMock,
-                $this->conditionalAvailabilityPeriodPageSearchDataExpanderPluginMocks
+                $this->conditionalAvailabilityPeriodPageSearchDataExpanderPluginMocks,
             );
 
         $this->assertInstanceOf(
             ConditionalAvailabilityPeriodPageSearchPublisher::class,
-            $this->conditionalAvailabilityPageSearchBusinessFactory->createConditionalAvailabilityPeriodPageSearchPublisher()
+            $this->conditionalAvailabilityPageSearchBusinessFactory->createConditionalAvailabilityPeriodPageSearchPublisher(),
         );
     }
 
@@ -127,7 +127,7 @@ class ConditionalAvailabilityPageSearchBusinessFactoryTest extends Unit
     {
         $this->assertInstanceOf(
             ConditionalAvailabilityPeriodPageSearchUnpublisher::class,
-            $this->conditionalAvailabilityPageSearchBusinessFactory->createConditionalAvailabilityPeriodPageSearchUnpublisher()
+            $this->conditionalAvailabilityPageSearchBusinessFactory->createConditionalAvailabilityPeriodPageSearchUnpublisher(),
         );
     }
 }

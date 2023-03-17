@@ -37,7 +37,7 @@ class ConditionalAvailabilityPageSearchToStoreFacadeBridgeTest extends Unit
             ->getMock();
 
         $this->conditionalAvailabilityPageSearchToStoreFacadeBridge = new ConditionalAvailabilityPageSearchToStoreFacadeBridge(
-            $this->storeFacadeInterfaceMock
+            $this->storeFacadeInterfaceMock,
         );
     }
 
@@ -52,7 +52,7 @@ class ConditionalAvailabilityPageSearchToStoreFacadeBridgeTest extends Unit
 
         $this->assertEquals(
             $this->storeTransferMock,
-            $this->conditionalAvailabilityPageSearchToStoreFacadeBridge->getCurrentStore()
+            $this->conditionalAvailabilityPageSearchToStoreFacadeBridge->getCurrentStore(),
         );
     }
 }

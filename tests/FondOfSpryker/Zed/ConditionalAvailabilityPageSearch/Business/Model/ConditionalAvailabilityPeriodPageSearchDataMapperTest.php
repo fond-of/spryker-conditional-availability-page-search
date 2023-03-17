@@ -25,7 +25,7 @@ class ConditionalAvailabilityPeriodPageSearchDataMapperTest extends Unit
     protected $storeTransferMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject[]|\FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface[]
+     * @var array<\FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface>|array<\PHPUnit\Framework\MockObject\MockObject>
      */
     protected $conditionalAvailabilityPeriodPageSearchDataExpanderPluginMocks;
 
@@ -52,7 +52,7 @@ class ConditionalAvailabilityPeriodPageSearchDataMapperTest extends Unit
 
         $this->conditionalAvailabilityPeriodPageSearchDataMapper = new ConditionalAvailabilityPeriodPageSearchDataMapper(
             $this->storeFacadeMock,
-            $this->conditionalAvailabilityPeriodPageSearchDataExpanderPluginMocks
+            $this->conditionalAvailabilityPeriodPageSearchDataExpanderPluginMocks,
         );
     }
 
@@ -82,7 +82,7 @@ class ConditionalAvailabilityPeriodPageSearchDataMapperTest extends Unit
                 'end_at' => '2020-02-29 00:00:00.000000',
                 'is_accessible' => true,
                 'store' => 'EROTS',
-            ]
+            ],
         );
 
         $this->assertArrayHasKey('start-at', $searchData);

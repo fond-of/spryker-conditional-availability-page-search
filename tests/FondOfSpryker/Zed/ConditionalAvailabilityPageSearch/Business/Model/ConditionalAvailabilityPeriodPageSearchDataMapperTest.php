@@ -78,6 +78,7 @@ class ConditionalAvailabilityPeriodPageSearchDataMapperTest extends Unit
                 'sku' => 'SKU',
                 'warehouse_group' => 'WG',
                 'quantity' => 1,
+                'original_start_at' => '2020-01-01 00:00:00.000000',
                 'start_at' => '2020-02-01 00:00:00.000000',
                 'end_at' => '2020-02-29 00:00:00.000000',
                 'is_accessible' => true,

@@ -101,34 +101,34 @@ class ConditionalAvailabilityPageSearchDependencyProviderTest extends Unit
             ->withConsecutive(['facade'], ['service'])
             ->willReturnOnConsecutiveCalls(
                 $this->storeFacadeMock,
-                $this->utilEncodingServiceMock
+                $this->utilEncodingServiceMock,
             );
 
         $this->assertEquals(
             $this->containerMock,
             $this->conditionalAvailabilityPageSearchDependencyProvider->provideBusinessLayerDependencies(
-                $this->containerMock
-            )
+                $this->containerMock,
+            ),
         );
 
         $this->assertInstanceOf(
             ConditionalAvailabilityPageSearchToStoreFacadeBridge::class,
-            $this->containerMock[ConditionalAvailabilityPageSearchDependencyProvider::FACADE_STORE]
+            $this->containerMock[ConditionalAvailabilityPageSearchDependencyProvider::FACADE_STORE],
         );
 
         $this->assertInstanceOf(
             ConditionalAvailabilityPageSearchToUtilEncodingServiceBridge::class,
-            $this->containerMock[ConditionalAvailabilityPageSearchDependencyProvider::SERVICE_UTIL_ENCODING]
+            $this->containerMock[ConditionalAvailabilityPageSearchDependencyProvider::SERVICE_UTIL_ENCODING],
         );
 
         $this->assertCount(
             0,
-            $this->containerMock[ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_DATA_EXPANDER]
+            $this->containerMock[ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_DATA_EXPANDER],
         );
 
         $this->assertCount(
             0,
-            $this->containerMock[ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_SEARCH_DATA_EXPANDER]
+            $this->containerMock[ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_SEARCH_DATA_EXPANDER],
         );
     }
 
@@ -154,13 +154,13 @@ class ConditionalAvailabilityPageSearchDependencyProviderTest extends Unit
         $this->assertEquals(
             $this->containerMock,
             $this->conditionalAvailabilityPageSearchDependencyProvider->provideCommunicationLayerDependencies(
-                $this->containerMock
-            )
+                $this->containerMock,
+            ),
         );
 
         $this->assertInstanceOf(
             ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge::class,
-            $this->containerMock[ConditionalAvailabilityPageSearchDependencyProvider::FACADE_EVENT_BEHAVIOR]
+            $this->containerMock[ConditionalAvailabilityPageSearchDependencyProvider::FACADE_EVENT_BEHAVIOR],
         );
     }
 }

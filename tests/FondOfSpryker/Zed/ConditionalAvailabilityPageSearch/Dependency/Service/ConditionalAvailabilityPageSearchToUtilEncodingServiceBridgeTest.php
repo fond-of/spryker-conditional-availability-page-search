@@ -41,7 +41,7 @@ class ConditionalAvailabilityPageSearchToUtilEncodingServiceBridgeTest extends U
         $this->value = [];
 
         $this->conditionalAvailabilityPageSearchToUtilEncodingServiceBridge = new ConditionalAvailabilityPageSearchToUtilEncodingServiceBridge(
-            $this->utilEncodingServiceInterfaceMock
+            $this->utilEncodingServiceInterfaceMock,
         );
     }
 
@@ -58,8 +58,8 @@ class ConditionalAvailabilityPageSearchToUtilEncodingServiceBridgeTest extends U
         $this->assertSame(
             $this->encodedJsonString,
             $this->conditionalAvailabilityPageSearchToUtilEncodingServiceBridge->encodeJson(
-                $this->value
-            )
+                $this->value,
+            ),
         );
     }
 
@@ -75,8 +75,8 @@ class ConditionalAvailabilityPageSearchToUtilEncodingServiceBridgeTest extends U
 
         $this->assertIsArray(
             $this->conditionalAvailabilityPageSearchToUtilEncodingServiceBridge->decodeJson(
-                $this->encodedJsonString
-            )
+                $this->encodedJsonString,
+            ),
         );
     }
 }

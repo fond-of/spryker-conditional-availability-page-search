@@ -37,7 +37,7 @@ class ConditionalAvailabilityPageSearchToSearchClientBridgeTest extends Unit
             ->getMock();
 
         $this->conditionalAvailabilityPageSearchToSearchClientBridge = new ConditionalAvailabilityPageSearchToSearchClientBridge(
-            $this->searchClientInterfaceMock
+            $this->searchClientInterfaceMock,
         );
     }
 
@@ -53,8 +53,8 @@ class ConditionalAvailabilityPageSearchToSearchClientBridgeTest extends Unit
 
         $this->assertIsArray(
             $this->conditionalAvailabilityPageSearchToSearchClientBridge->search(
-                $this->queryInterfaceMock
-            )
+                $this->queryInterfaceMock,
+            ),
         );
     }
 
@@ -72,8 +72,8 @@ class ConditionalAvailabilityPageSearchToSearchClientBridgeTest extends Unit
             QueryInterface::class,
             $this->conditionalAvailabilityPageSearchToSearchClientBridge->expandQuery(
                 $this->queryInterfaceMock,
-                []
-            )
+                [],
+            ),
         );
     }
 }

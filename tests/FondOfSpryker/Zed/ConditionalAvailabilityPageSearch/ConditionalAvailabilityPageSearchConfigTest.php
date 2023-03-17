@@ -25,7 +25,7 @@ class ConditionalAvailabilityPageSearchConfigTest extends Unit
     public function testGetConditionalAvailabilityPeriodSynchronizationPoolName(): void
     {
         $this->assertNull(
-            $this->conditionalAvailabilityPageSearchConfig->getConditionalAvailabilityPeriodSynchronizationPoolName()
+            $this->conditionalAvailabilityPageSearchConfig->getConditionalAvailabilityPeriodSynchronizationPoolName(),
         );
     }
 
@@ -35,7 +35,7 @@ class ConditionalAvailabilityPageSearchConfigTest extends Unit
     public function testIsSendingToQueue(): void
     {
         $this->assertTrue(
-            $this->conditionalAvailabilityPageSearchConfig->isSendingToQueue()
+            $this->conditionalAvailabilityPageSearchConfig->isSendingToQueue(),
         );
     }
 }

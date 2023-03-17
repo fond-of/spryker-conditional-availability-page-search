@@ -8,6 +8,9 @@ use Spryker\Client\SearchElasticsearch\Plugin\ResultFormatter\AbstractElasticsea
 
 class RawConditionalAvailabilityPeriodsResultFormatterPlugin extends AbstractElasticsearchResultFormatterPlugin
 {
+    /**
+     * @var string
+     */
     public const NAME = 'periods';
 
     /**

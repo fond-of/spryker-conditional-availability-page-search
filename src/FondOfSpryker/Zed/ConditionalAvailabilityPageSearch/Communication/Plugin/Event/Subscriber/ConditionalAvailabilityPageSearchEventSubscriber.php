@@ -44,7 +44,7 @@ class ConditionalAvailabilityPageSearchEventSubscriber extends AbstractPlugin im
     ): void {
         $eventCollection->addListenerQueued(
             ConditionalAvailabilityEvents::CONDITIONAL_AVAILABILITY_UNPUBLISH,
-            new ConditionalAvailabilityPageSearchListener()
+            new ConditionalAvailabilityPageSearchListener(),
         );
     }
 
@@ -58,7 +58,7 @@ class ConditionalAvailabilityPageSearchEventSubscriber extends AbstractPlugin im
     ): void {
         $eventCollection->addListenerQueued(
             ConditionalAvailabilityEvents::ENTITY_FOS_CONDITIONAL_AVAILABILITY_DELETE,
-            new ConditionalAvailabilityPageSearchListener()
+            new ConditionalAvailabilityPageSearchListener(),
         );
     }
 
@@ -72,7 +72,7 @@ class ConditionalAvailabilityPageSearchEventSubscriber extends AbstractPlugin im
     ): void {
         $eventCollection->addListenerQueued(
             ConditionalAvailabilityEvents::CONDITIONAL_AVAILABILITY_PERIOD_PUBLISH,
-            new ConditionalAvailabilityPeriodPageSearchListener()
+            new ConditionalAvailabilityPeriodPageSearchListener(),
         );
     }
 
@@ -86,7 +86,7 @@ class ConditionalAvailabilityPageSearchEventSubscriber extends AbstractPlugin im
     ): void {
         $eventCollection->addListenerQueued(
             ConditionalAvailabilityEvents::ENTITY_FOS_CONDITIONAL_AVAILABILITY_PERIOD_CREATE,
-            new ConditionalAvailabilityPeriodPageSearchListener()
+            new ConditionalAvailabilityPeriodPageSearchListener(),
         );
     }
 
@@ -100,7 +100,7 @@ class ConditionalAvailabilityPageSearchEventSubscriber extends AbstractPlugin im
     ): void {
         $eventCollection->addListenerQueued(
             ConditionalAvailabilityEvents::ENTITY_FOS_CONDITIONAL_AVAILABILITY_PERIOD_UPDATE,
-            new ConditionalAvailabilityPeriodPageSearchListener()
+            new ConditionalAvailabilityPeriodPageSearchListener(),
         );
     }
 }

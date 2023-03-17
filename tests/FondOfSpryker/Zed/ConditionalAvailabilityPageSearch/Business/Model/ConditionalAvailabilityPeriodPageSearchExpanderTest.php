@@ -21,7 +21,7 @@ class ConditionalAvailabilityPeriodPageSearchExpanderTest extends Unit
     protected $conditionalAvailabilityPageSearchToStoreFacadeInterfaceMock;
 
     /**
-     * @var array|\FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface[]
+     * @var array<\FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface>
      */
     protected $conditionalAvailabilityPeriodPageDataExpanderPlugins;
 
@@ -95,7 +95,7 @@ class ConditionalAvailabilityPeriodPageSearchExpanderTest extends Unit
 
         $this->conditionalAvailabilityPeriodPageSearchExpander = new ConditionalAvailabilityPeriodPageSearchExpander(
             $this->conditionalAvailabilityPageSearchToStoreFacadeInterfaceMock,
-            $this->conditionalAvailabilityPeriodPageDataExpanderPlugins
+            $this->conditionalAvailabilityPeriodPageDataExpanderPlugins,
         );
     }
 
@@ -141,8 +141,8 @@ class ConditionalAvailabilityPeriodPageSearchExpanderTest extends Unit
         $this->assertInstanceOf(
             ConditionalAvailabilityPeriodPageSearchTransfer::class,
             $this->conditionalAvailabilityPeriodPageSearchExpander->expand(
-                $this->conditionalAvailabilityPeriodPageSearchTransferMock
-            )
+                $this->conditionalAvailabilityPeriodPageSearchTransferMock,
+            ),
         );
     }
 }

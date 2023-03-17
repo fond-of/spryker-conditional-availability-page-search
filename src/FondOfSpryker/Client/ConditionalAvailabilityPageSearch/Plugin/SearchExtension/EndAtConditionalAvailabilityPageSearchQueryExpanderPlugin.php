@@ -36,7 +36,7 @@ class EndAtConditionalAvailabilityPageSearchQueryExpanderPlugin extends Abstract
 
         $endAtRange = (new Range())->addField(
             ConditionalAvailabilityPeriodIndexMap::END_AT,
-            ['lte' => $endAt->format('Y-m-d H:i:s')]
+            ['lte' => $endAt->format('Y-m-d H:i:s')],
         );
 
         $boolQuery->addFilter($endAtRange);
@@ -58,7 +58,7 @@ class EndAtConditionalAvailabilityPageSearchQueryExpanderPlugin extends Abstract
             throw new InvalidArgumentException(sprintf(
                 'Localized query expander available only with %s, got: %s',
                 BoolQuery::class,
-                get_class($boolQuery)
+                get_class($boolQuery),
             ));
         }
 

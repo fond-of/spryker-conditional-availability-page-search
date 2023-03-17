@@ -12,15 +12,39 @@ use Spryker\Zed\Kernel\Container;
 
 class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const FACADE_EVENT_BEHAVIOR = 'FACADE_EVENT_BEHAVIOR';
+
+    /**
+     * @var string
+     */
     public const FACADE_STORE = 'FACADE_STORE';
 
+    /**
+     * @var string
+     */
     public const PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_DATA_EXPANDER = 'PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_DATA_EXPANDER';
+
+    /**
+     * @var string
+     */
     public const PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_SEARCH_DATA_EXPANDER = 'PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_SEARCH_DATA_EXPANDER';
 
+    /**
+     * @var string
+     */
     public const PROPEL_QUERY_CONDITIONAL_AVAILABILITY_PERIOD = 'PROPEL_QUERY_CONDITIONAL_AVAILABILITY_PERIOD';
+
+    /**
+     * @var string
+     */
     public const PROPEL_QUERY_CONDITIONAL_AVAILABILITY = 'PROPEL_QUERY_CONDITIONAL_AVAILABILITY';
 
+    /**
+     * @var string
+     */
     public const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
 
     /**
@@ -92,7 +116,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
     {
         $container[static::FACADE_STORE] = static function (Container $container) {
             return new ConditionalAvailabilityPageSearchToStoreFacadeBridge(
-                $container->getLocator()->store()->facade()
+                $container->getLocator()->store()->facade(),
             );
         };
 
@@ -108,7 +132,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
     {
         $container[static::SERVICE_UTIL_ENCODING] = static function (Container $container) {
             return new ConditionalAvailabilityPageSearchToUtilEncodingServiceBridge(
-                $container->getLocator()->utilEncoding()->service()
+                $container->getLocator()->utilEncoding()->service(),
             );
         };
 
@@ -132,7 +156,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
     }
 
     /**
-     * @return \FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface[]
+     * @return array<\FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface>
      */
     protected function getConditionalAvailabilityPeriodPageSearchDataExpanderPlugins(): array
     {
@@ -148,7 +172,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
     {
         $container[static::FACADE_EVENT_BEHAVIOR] = static function (Container $container) {
             return new ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge(
-                $container->getLocator()->eventBehavior()->facade()
+                $container->getLocator()->eventBehavior()->facade(),
             );
         };
 
@@ -186,7 +210,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
     }
 
     /**
-     * @return \FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface[]
+     * @return array<\FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface>
      */
     protected function getConditionalAvailabilityPeriodPageDataExpanderPlugins(): array
     {

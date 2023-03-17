@@ -19,7 +19,7 @@ class ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTest extends U
     protected $eventBehaviorFacadeInterfaceMock;
 
     /**
-     * @var \Generated\Shared\Transfer\EventEntityTransfer[]
+     * @var array<\Generated\Shared\Transfer\EventEntityTransfer>
      */
     protected $eventTransfers;
 
@@ -53,7 +53,7 @@ class ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTest extends U
         $this->foreignKeyColumnName = 'foreign-key-column-name';
 
         $this->conditionalAvailabilityPageSearchToEventBehaviorFacadeBridge = new ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge(
-            $this->eventBehaviorFacadeInterfaceMock
+            $this->eventBehaviorFacadeInterfaceMock,
         );
     }
 
@@ -69,8 +69,8 @@ class ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTest extends U
 
         $this->assertIsArray(
             $this->conditionalAvailabilityPageSearchToEventBehaviorFacadeBridge->getEventTransferIds(
-                $this->eventTransfers
-            )
+                $this->eventTransfers,
+            ),
         );
     }
 
@@ -87,8 +87,8 @@ class ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTest extends U
         $this->assertIsArray(
             $this->conditionalAvailabilityPageSearchToEventBehaviorFacadeBridge->getEventTransferForeignKeys(
                 $this->eventTransfers,
-                $this->foreignKeyColumnName
-            )
+                $this->foreignKeyColumnName,
+            ),
         );
     }
 }

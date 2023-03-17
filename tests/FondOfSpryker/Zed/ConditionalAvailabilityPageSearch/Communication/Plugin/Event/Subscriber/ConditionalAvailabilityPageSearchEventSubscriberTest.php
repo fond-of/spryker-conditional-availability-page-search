@@ -37,8 +37,8 @@ class ConditionalAvailabilityPageSearchEventSubscriberTest extends Unit
         $this->assertInstanceOf(
             EventCollectionInterface::class,
             $this->conditionalAvailabilityPageSearchEventSubscriber->getSubscribedEvents(
-                $this->eventCollectionInterfaceMock
-            )
+                $this->eventCollectionInterfaceMock,
+            ),
         );
     }
 }

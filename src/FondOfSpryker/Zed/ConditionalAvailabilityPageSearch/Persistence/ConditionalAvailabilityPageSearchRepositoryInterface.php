@@ -10,7 +10,7 @@ interface ConditionalAvailabilityPageSearchRepositoryInterface
      * @param \Generated\Shared\Transfer\FilterTransfer $filterTransfer
      * @param array $conditionalAvailabilityIds
      *
-     * @return \Generated\Shared\Transfer\FosConditionalAvailabilityPeriodPageSearchEntityTransfer[]
+     * @return array<\Generated\Shared\Transfer\FosConditionalAvailabilityPeriodPageSearchEntityTransfer>
      */
     public function findFilteredConditionalAvailabilityPeriodPageSearchEntities(
         FilterTransfer $filterTransfer,

@@ -38,7 +38,7 @@ class StartAtConditionalAvailabilityPageSearchQueryExpanderPlugin extends Abstra
             ConditionalAvailabilityPeriodIndexMap::START_AT,
             [
                 'gte' => $startAt->format('Y-m-d H:i:s'),
-            ]
+            ],
         );
 
         $boolQuery->addFilter($startAtRange);
@@ -60,7 +60,7 @@ class StartAtConditionalAvailabilityPageSearchQueryExpanderPlugin extends Abstra
             throw new InvalidArgumentException(sprintf(
                 'Localized query expander available only with %s, got: %s',
                 BoolQuery::class,
-                get_class($boolQuery)
+                get_class($boolQuery),
             ));
         }
 

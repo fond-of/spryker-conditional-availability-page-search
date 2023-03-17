@@ -12,9 +12,9 @@ class ConditionalAvailabilityPageSearchRepository extends AbstractRepository imp
 {
     /**
      * @param \Generated\Shared\Transfer\FilterTransfer $filterTransfer
-     * @param int[] $conditionalAvailabilityIds
+     * @param array<int> $conditionalAvailabilityIds
      *
-     * @return \Generated\Shared\Transfer\FosConditionalAvailabilityPeriodPageSearchEntityTransfer[]
+     * @return array<\Generated\Shared\Transfer\FosConditionalAvailabilityPeriodPageSearchEntityTransfer>
      */
     public function findFilteredConditionalAvailabilityPeriodPageSearchEntities(
         FilterTransfer $filterTransfer,
@@ -23,15 +23,15 @@ class ConditionalAvailabilityPageSearchRepository extends AbstractRepository imp
         $fosConditionalAvailabilityPeriodPageSearchQuery = $this->getFactory()
             ->createConditionalAvailabilityPeriodPageSearchQuery();
 
-        if (!empty($conditionalAvailabilityIds)) {
+        if ($conditionalAvailabilityIds) {
             $fosConditionalAvailabilityPeriodPageSearchQuery->filterByFkConditionalAvailability_In(
-                $conditionalAvailabilityIds
+                $conditionalAvailabilityIds,
             );
         }
 
         return $this->buildQueryFromCriteria(
             $fosConditionalAvailabilityPeriodPageSearchQuery,
-            $filterTransfer
+            $filterTransfer,
         )->find();
     }
 }

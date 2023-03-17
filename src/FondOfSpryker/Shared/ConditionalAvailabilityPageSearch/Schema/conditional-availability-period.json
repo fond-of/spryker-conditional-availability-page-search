@@ -36,6 +36,10 @@
         "is-accessible": {
           "type": "boolean"
         },
+        "original-start-at": {
+          "type": "date",
+          "format": "yyyy-MM-dd HH:mm:ss.SSSSSS"
+        },
         "start-at": {
           "type": "date",
           "format": "yyyy-MM-dd HH:mm:ss.SSSSSS"

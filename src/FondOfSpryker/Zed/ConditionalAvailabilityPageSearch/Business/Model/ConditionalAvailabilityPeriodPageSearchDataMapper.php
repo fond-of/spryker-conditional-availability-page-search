@@ -25,6 +25,11 @@ class ConditionalAvailabilityPeriodPageSearchDataMapper implements ConditionalAv
     /**
      * @var string
      */
+    protected const DATA_KEY_ORIGINAL_START_AT = 'original_start_at';
+
+    /**
+     * @var string
+     */
     protected const DATA_KEY_START_AT = 'start_at';
 
     /**
@@ -56,6 +61,11 @@ class ConditionalAvailabilityPeriodPageSearchDataMapper implements ConditionalAv
      * @var string
      */
     protected const SEARCH_RESULT_DATA_KEY_WAREHOUSE_GROUP = 'warehouse_group';
+
+    /**
+     * @var string
+     */
+    protected const SEARCH_RESULT_DATA_KEY_ORIGINAL_START_AT = 'original_start_at';
 
     /**
      * @var string
@@ -114,15 +124,14 @@ class ConditionalAvailabilityPeriodPageSearchDataMapper implements ConditionalAv
             ConditionalAvailabilityPeriodIndexMap::SKU => $data[static::DATA_KEY_SKU],
             ConditionalAvailabilityPeriodIndexMap::QUANTITY => $data[static::DATA_KEY_QUANTITY],
             ConditionalAvailabilityPeriodIndexMap::WAREHOUSE_GROUP => $data[static::DATA_KEY_WAREHOUSE_GROUP],
+            ConditionalAvailabilityPeriodIndexMap::ORIGINAL_START_AT => $data[static::DATA_KEY_ORIGINAL_START_AT],
             ConditionalAvailabilityPeriodIndexMap::START_AT => $data[static::DATA_KEY_START_AT],
             ConditionalAvailabilityPeriodIndexMap::END_AT => $data[static::DATA_KEY_END_AT],
             ConditionalAvailabilityPeriodIndexMap::IS_ACCESSIBLE => $data[static::DATA_KEY_IS_ACCESSIBLE],
             ConditionalAvailabilityPeriodIndexMap::SEARCH_RESULT_DATA => $this->mapConditionalAvailabilityPeriodDataToSearchResultData($data),
         ];
 
-        $searchData = $this->expandSearchData($data, $searchData);
-
-        return $searchData;
+        return $this->expandSearchData($data, $searchData);
     }
 
     /**
@@ -136,6 +145,7 @@ class ConditionalAvailabilityPeriodPageSearchDataMapper implements ConditionalAv
             static::SEARCH_RESULT_DATA_KEY_SKU => $data[static::DATA_KEY_SKU],
             static::SEARCH_RESULT_DATA_KEY_QUANTITY => $data[static::DATA_KEY_QUANTITY],
             static::SEARCH_RESULT_DATA_KEY_WAREHOUSE_GROUP => $data[static::DATA_KEY_WAREHOUSE_GROUP],
+            static::SEARCH_RESULT_DATA_KEY_ORIGINAL_START_AT => $data[static::DATA_KEY_ORIGINAL_START_AT],
             static::SEARCH_RESULT_DATA_KEY_START_AT => $data[static::DATA_KEY_START_AT],
             static::SEARCH_RESULT_DATA_KEY_END_AT => $data[static::DATA_KEY_END_AT],
             static::SEARCH_RESULT_DATA_KEY_IS_ACCESSIBLE => $data[static::DATA_KEY_IS_ACCESSIBLE],

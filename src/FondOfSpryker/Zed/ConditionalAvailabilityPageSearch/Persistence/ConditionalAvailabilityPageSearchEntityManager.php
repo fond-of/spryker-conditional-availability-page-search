@@ -41,7 +41,7 @@ class ConditionalAvailabilityPageSearchEntityManager extends AbstractEntityManag
             ->createConditionalAvailabilityPeriodPageSearchMapper()
             ->mapTransferToEntity(
                 $conditionalAvailabilityPeriodPageSearchTransfer,
-                new FosConditionalAvailabilityPeriodPageSearch()
+                new FosConditionalAvailabilityPeriodPageSearch(),
             );
 
         $fosConditionalAvailabilityPeriodPageSearch->save();

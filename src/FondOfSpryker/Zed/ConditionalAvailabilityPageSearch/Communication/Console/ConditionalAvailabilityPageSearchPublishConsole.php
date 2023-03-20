@@ -9,9 +9,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @method \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchQueryContainerInterface getQueryContainer()
  * @method \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business\ConditionalAvailabilityPageSearchFacadeInterface getFacade()
+ * @method \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchRepositoryInterface getRepository()
+ * @method \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Communication\ConditionalAvailabilityPageSearchCommunicationFactory getFactory()
  */
 class ConditionalAvailabilityPageSearchPublishConsole extends Console
 {
+    /**
+     * @var string
+     */
     public const COMMAND_NAME = 'conditional-availability-page-search:publish';
 
     /**
@@ -35,5 +40,7 @@ class ConditionalAvailabilityPageSearchPublishConsole extends Console
     {
         $this->info('Publish');
         $this->getFacade()->publish([16, 17]);
+
+        return null;
     }
 }

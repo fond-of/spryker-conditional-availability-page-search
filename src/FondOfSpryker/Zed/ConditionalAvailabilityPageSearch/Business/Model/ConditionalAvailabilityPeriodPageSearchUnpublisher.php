@@ -20,14 +20,14 @@ class ConditionalAvailabilityPeriodPageSearchUnpublisher implements ConditionalA
     }
 
     /**
-     * @param int[] $conditionalAvailabilityIds
+     * @param array<int> $conditionalAvailabilityIds
      *
      * @return void
      */
     public function unpublish(array $conditionalAvailabilityIds): void
     {
         $this->entityManager->deleteConditionalAvailabilityPeriodSearchPagesByConditionalAvailabilityIds(
-            $conditionalAvailabilityIds
+            $conditionalAvailabilityIds,
         );
     }
 }

@@ -2,6 +2,8 @@
 
 namespace FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business;
 
+use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchDataMapper;
+use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchDataMapperInterface;
 use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchExpander;
 use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchExpanderInterface;
 use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchPublisher;
@@ -9,7 +11,6 @@ use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business\Model\Condition
 use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchUnpublisher;
 use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchUnpublisherInterface;
 use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchDependencyProvider;
-use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToSearchFacadeInterface;
 use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface;
 use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Service\ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
@@ -31,8 +32,8 @@ class ConditionalAvailabilityPageSearchBusinessFactory extends AbstractBusinessF
             $this->getQueryContainer(),
             $this->getEntityManager(),
             $this->createConditionalAvailabilityPeriodPageSearchExpander(),
-            $this->getSearchFacade(),
-            $this->getUtilEncodingService()
+            $this->getUtilEncodingService(),
+            $this->createConditionalAvailabilityPeriodPageSearchDataMapper(),
         );
     }
 
@@ -45,22 +46,25 @@ class ConditionalAvailabilityPageSearchBusinessFactory extends AbstractBusinessF
     }
 
     /**
+     * @return \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchDataMapperInterface
+     */
+    protected function createConditionalAvailabilityPeriodPageSearchDataMapper(): ConditionalAvailabilityPeriodPageSearchDataMapperInterface
+    {
+        return new ConditionalAvailabilityPeriodPageSearchDataMapper(
+            $this->getStoreFacade(),
+            $this->getConditionalAvailabilityPeriodPageSearchDataExpanderPlugins(),
+        );
+    }
+
+    /**
      * @return \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchExpanderInterface
      */
     protected function createConditionalAvailabilityPeriodPageSearchExpander(): ConditionalAvailabilityPeriodPageSearchExpanderInterface
     {
         return new ConditionalAvailabilityPeriodPageSearchExpander(
             $this->getStoreFacade(),
-            $this->getConditionalAvailabilityPeriodPageDataExpanderPlugins()
+            $this->getConditionalAvailabilityPeriodPageDataExpanderPlugins(),
         );
-    }
-
-    /**
-     * @return \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToSearchFacadeInterface
-     */
-    protected function getSearchFacade(): ConditionalAvailabilityPageSearchToSearchFacadeInterface
-    {
-        return $this->getProvidedDependency(ConditionalAvailabilityPageSearchDependencyProvider::FACADE_SEARCH);
     }
 
     /**
@@ -80,10 +84,18 @@ class ConditionalAvailabilityPageSearchBusinessFactory extends AbstractBusinessF
     }
 
     /**
-     * @return \FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface[]
+     * @return array<\FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface>
      */
     protected function getConditionalAvailabilityPeriodPageDataExpanderPlugins(): array
     {
         return $this->getProvidedDependency(ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_DATA_EXPANDER);
+    }
+
+    /**
+     * @return array<\FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface>
+     */
+    protected function getConditionalAvailabilityPeriodPageSearchDataExpanderPlugins(): array
+    {
+        return $this->getProvidedDependency(ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_SEARCH_DATA_EXPANDER);
     }
 }

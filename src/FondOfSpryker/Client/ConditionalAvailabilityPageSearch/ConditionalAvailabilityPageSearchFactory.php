@@ -5,8 +5,8 @@ namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch;
 use FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToCustomerClientInterface;
 use FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToSearchClientInterface;
 use Spryker\Client\Kernel\AbstractFactory;
-use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
-use Spryker\Client\Search\Dependency\Plugin\SearchStringSetterInterface;
+use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
+use Spryker\Client\SearchExtension\Dependency\Plugin\SearchStringSetterInterface;
 
 class ConditionalAvailabilityPageSearchFactory extends AbstractFactory
 {
@@ -29,7 +29,7 @@ class ConditionalAvailabilityPageSearchFactory extends AbstractFactory
     /**
      * @param string $searchString
      *
-     * @return \Spryker\Client\Search\Dependency\Plugin\QueryInterface
+     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
      */
     public function createSearchQuery(string $searchString): QueryInterface
     {
@@ -43,32 +43,32 @@ class ConditionalAvailabilityPageSearchFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Client\Search\Dependency\Plugin\QueryInterface
+     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
      */
     protected function getSearchQueryPlugin(): QueryInterface
     {
         return $this->getProvidedDependency(
-            ConditionalAvailabilityPageSearchDependencyProvider::PLUGIN_SEARCH_QUERY
+            ConditionalAvailabilityPageSearchDependencyProvider::PLUGIN_SEARCH_QUERY,
         );
     }
 
     /**
-     * @return \Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface[]
+     * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface>
      */
     public function getSearchQueryExpanderPlugins(): array
     {
         return $this->getProvidedDependency(
-            ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_SEARCH_QUERY_EXPANDER
+            ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_SEARCH_QUERY_EXPANDER,
         );
     }
 
     /**
-     * @return \Spryker\Client\Search\Dependency\Plugin\ResultFormatterPluginInterface[]
+     * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface>
      */
     public function getSearchResultFormatterPlugins(): array
     {
         return $this->getProvidedDependency(
-            ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_SEARCH_RESULT_FORMATTER
+            ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_SEARCH_RESULT_FORMATTER,
         );
     }
 }

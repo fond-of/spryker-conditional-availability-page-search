@@ -2,16 +2,16 @@
 
 namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Dependency\Client;
 
-use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
+use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 
 interface ConditionalAvailabilityPageSearchToSearchClientInterface
 {
     /**
-     * @param \Spryker\Client\Search\Dependency\Plugin\QueryInterface $searchQuery
-     * @param \Spryker\Client\Search\Dependency\Plugin\ResultFormatterPluginInterface[] $resultFormatters
+     * @param \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface $searchQuery
+     * @param array<\Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface> $resultFormatters
      * @param array $requestParameters
      *
-     * @return array|\Elastica\ResultSet
+     * @return mixed
      */
     public function search(
         QueryInterface $searchQuery,
@@ -20,11 +20,11 @@ interface ConditionalAvailabilityPageSearchToSearchClientInterface
     );
 
     /**
-     * @param \Spryker\Client\Search\Dependency\Plugin\QueryInterface $searchQuery
-     * @param \Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface[] $searchQueryExpanders
+     * @param \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface $searchQuery
+     * @param array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface> $searchQueryExpanders
      * @param array $requestParameters
      *
-     * @return \Spryker\Client\Search\Dependency\Plugin\QueryInterface
+     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
      */
     public function expandQuery(
         QueryInterface $searchQuery,

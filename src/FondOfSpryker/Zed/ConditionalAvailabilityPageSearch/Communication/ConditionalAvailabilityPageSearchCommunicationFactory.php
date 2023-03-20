@@ -4,7 +4,6 @@ namespace FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Communication;
 
 use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchDependencyProvider;
 use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToEventBehaviorFacadeInterface;
-use FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface;
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 
 /**
@@ -17,32 +16,12 @@ use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 class ConditionalAvailabilityPageSearchCommunicationFactory extends AbstractCommunicationFactory
 {
     /**
-     * @return \FondOfSpryker\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageMapExpanderPluginInterface[]
-     */
-    public function getConditionalAvailabilityPeriodPageMapExpanderPlugins(): array
-    {
-        return $this->getProvidedDependency(
-            ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_MAP_EXPANDER
-        );
-    }
-
-    /**
-     * @return \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface
-     */
-    public function getStoreFacade(): ConditionalAvailabilityPageSearchToStoreFacadeInterface
-    {
-        return $this->getProvidedDependency(
-            ConditionalAvailabilityPageSearchDependencyProvider::FACADE_STORE
-        );
-    }
-
-    /**
      * @return \FondOfSpryker\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToEventBehaviorFacadeInterface
      */
     public function getEventBehaviorFacade(): ConditionalAvailabilityPageSearchToEventBehaviorFacadeInterface
     {
         return $this->getProvidedDependency(
-            ConditionalAvailabilityPageSearchDependencyProvider::FACADE_EVENT_BEHAVIOR
+            ConditionalAvailabilityPageSearchDependencyProvider::FACADE_EVENT_BEHAVIOR,
         );
     }
 }

@@ -1,30 +1,31 @@
 <?php
 
-namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Plugin\Elasticsearch\QueryExpander;
+namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Plugin\SearchExtension;
 
 use DateTime;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Range;
 use FondOfSpryker\Shared\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchConstants;
-use Generated\Shared\Search\PageIndexMap;
+use Generated\Shared\Search\ConditionalAvailabilityPeriodIndexMap;
 use InvalidArgumentException;
 use Spryker\Client\Kernel\AbstractPlugin;
-use Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface;
-use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
+use Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface;
+use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 
-/**
- * @method \FondOfSpryker\Client\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchFactory getFactory()
- */
 class StartAtConditionalAvailabilityPageSearchQueryExpanderPlugin extends AbstractPlugin implements QueryExpanderPluginInterface
 {
     /**
-     * @param \Spryker\Client\Search\Dependency\Plugin\QueryInterface $searchQuery
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface $searchQuery
      * @param array $requestParameters
      *
-     * @return \Spryker\Client\Search\Dependency\Plugin\QueryInterface
+     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
      */
-    public function expandQuery(QueryInterface $searchQuery, array $requestParameters = [])
+    public function expandQuery(QueryInterface $searchQuery, array $requestParameters = []): QueryInterface
     {
         if (!isset($requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_START_AT])) {
             return $searchQuery;
@@ -34,10 +35,10 @@ class StartAtConditionalAvailabilityPageSearchQueryExpanderPlugin extends Abstra
         $boolQuery = $this->getBoolQuery($searchQuery->getSearchQuery());
 
         $startAtRange = (new Range())->addField(
-            PageIndexMap::START_AT,
+            ConditionalAvailabilityPeriodIndexMap::START_AT,
             [
                 'gte' => $startAt->format('Y-m-d H:i:s'),
-            ]
+            ],
         );
 
         $boolQuery->addFilter($startAtRange);
@@ -59,7 +60,7 @@ class StartAtConditionalAvailabilityPageSearchQueryExpanderPlugin extends Abstra
             throw new InvalidArgumentException(sprintf(
                 'Localized query expander available only with %s, got: %s',
                 BoolQuery::class,
-                get_class($boolQuery)
+                get_class($boolQuery),
             ));
         }
 

@@ -83,7 +83,7 @@ class ConditionalAvailabilityPageSearchFactoryTest extends Unit
 
         $this->assertInstanceOf(
             ConditionalAvailabilityPageSearchToSearchClientInterface::class,
-            $this->conditionalAvailabilityPageSearchFactory->getSearchClient()
+            $this->conditionalAvailabilityPageSearchFactory->getSearchClient(),
         );
     }
 
@@ -103,7 +103,7 @@ class ConditionalAvailabilityPageSearchFactoryTest extends Unit
 
         $this->assertInstanceOf(
             ConditionalAvailabilityPageSearchToCustomerClientInterface::class,
-            $this->conditionalAvailabilityPageSearchFactory->getCustomerClient()
+            $this->conditionalAvailabilityPageSearchFactory->getCustomerClient(),
         );
     }
 
@@ -124,8 +124,8 @@ class ConditionalAvailabilityPageSearchFactoryTest extends Unit
         $this->assertInstanceOf(
             QueryInterface::class,
             $this->conditionalAvailabilityPageSearchFactory->createSearchQuery(
-                $this->searchString
-            )
+                $this->searchString,
+            ),
         );
     }
 
@@ -144,7 +144,7 @@ class ConditionalAvailabilityPageSearchFactoryTest extends Unit
             ->willReturn([]);
 
         $this->assertIsArray(
-            $this->conditionalAvailabilityPageSearchFactory->getSearchQueryExpanderPlugins()
+            $this->conditionalAvailabilityPageSearchFactory->getSearchQueryExpanderPlugins(),
         );
     }
 
@@ -163,7 +163,7 @@ class ConditionalAvailabilityPageSearchFactoryTest extends Unit
             ->willReturn([]);
 
         $this->assertIsArray(
-            $this->conditionalAvailabilityPageSearchFactory->getSearchResultFormatterPlugins()
+            $this->conditionalAvailabilityPageSearchFactory->getSearchResultFormatterPlugins(),
         );
     }
 }

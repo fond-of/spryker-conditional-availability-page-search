@@ -8,7 +8,7 @@ use Orm\Zed\ConditionalAvailability\Persistence\FosConditionalAvailabilityQuery;
 interface ConditionalAvailabilityPageSearchQueryContainerInterface
 {
     /**
-     * @param int[] $conditionalAvailabilityIds
+     * @param array<int> $conditionalAvailabilityIds
      *
      * @return \Orm\Zed\ConditionalAvailability\Persistence\FosConditionalAvailabilityPeriodQuery
      */
@@ -17,7 +17,7 @@ interface ConditionalAvailabilityPageSearchQueryContainerInterface
     ): FosConditionalAvailabilityPeriodQuery;
 
     /**
-     * @param int[] $conditionalAvailabilityIds
+     * @param array<int> $conditionalAvailabilityIds
      *
      * @return \Orm\Zed\ConditionalAvailability\Persistence\FosConditionalAvailabilityPeriodQuery
      */
@@ -26,7 +26,7 @@ interface ConditionalAvailabilityPageSearchQueryContainerInterface
     ): FosConditionalAvailabilityPeriodQuery;
 
     /**
-     * @param int[] $conditionalAvailabilityIds
+     * @param array<int> $conditionalAvailabilityIds
      *
      * @return \Orm\Zed\ConditionalAvailability\Persistence\FosConditionalAvailabilityQuery
      */

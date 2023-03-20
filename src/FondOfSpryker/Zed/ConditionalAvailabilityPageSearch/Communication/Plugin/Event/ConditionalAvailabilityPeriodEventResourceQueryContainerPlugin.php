@@ -30,7 +30,7 @@ class ConditionalAvailabilityPeriodEventResourceQueryContainerPlugin extends Abs
      */
     public function getEventName(): string
     {
-        return ConditionalAvailabilityEvents::ENTITY_FOS_CONDITIONAL_AVAILABILITY_PERIOD_CREATE;
+        return ConditionalAvailabilityEvents::CONDITIONAL_AVAILABILITY_PERIOD_PUBLISH;
     }
 
     /**
@@ -42,7 +42,7 @@ class ConditionalAvailabilityPeriodEventResourceQueryContainerPlugin extends Abs
     }
 
     /**
-     * @param int[] $ids
+     * @param array<int> $ids
      *
      * @return \Propel\Runtime\ActiveQuery\ModelCriteria|null
      */

@@ -1,29 +1,28 @@
 <?php
 
-declare(strict_types = 1);
-
-namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Plugin\Elasticsearch\QueryExpander;
+namespace FondOfSpryker\Client\ConditionalAvailabilityPageSearch\Plugin\SearchExtension;
 
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Term;
 use FondOfSpryker\Shared\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchConstants;
-use Generated\Shared\Search\PageIndexMap;
+use Generated\Shared\Search\ConditionalAvailabilityPeriodIndexMap;
 use InvalidArgumentException;
 use Spryker\Client\Kernel\AbstractPlugin;
-use Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface;
-use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
+use Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface;
+use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 
-/**
- * @method \FondOfSpryker\Client\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchFactory getFactory()
- */
 class WarehouseGroupConditionalAvailabilityPageSearchQueryExpanderPlugin extends AbstractPlugin implements QueryExpanderPluginInterface
 {
     /**
-     * @param \Spryker\Client\Search\Dependency\Plugin\QueryInterface $searchQuery
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface $searchQuery
      * @param array $requestParameters
      *
-     * @return \Spryker\Client\Search\Dependency\Plugin\QueryInterface
+     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
      */
     public function expandQuery(QueryInterface $searchQuery, array $requestParameters = []): QueryInterface
     {
@@ -34,8 +33,8 @@ class WarehouseGroupConditionalAvailabilityPageSearchQueryExpanderPlugin extends
         $warehouseGroup = $requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_WAREHOUSE_GROUP];
 
         $warehouseGroupTerm = (new Term())->setTerm(
-            PageIndexMap::WAREHOUSE_GROUP,
-            $warehouseGroup
+            ConditionalAvailabilityPeriodIndexMap::WAREHOUSE_GROUP,
+            $warehouseGroup,
         );
 
         $this->getBoolQuery($searchQuery->getSearchQuery())->addMust($warehouseGroupTerm);
@@ -57,7 +56,7 @@ class WarehouseGroupConditionalAvailabilityPageSearchQueryExpanderPlugin extends
             throw new InvalidArgumentException(sprintf(
                 'Localized query expander available only with %s, got: %s',
                 BoolQuery::class,
-                get_class($boolQuery)
+                get_class($boolQuery),
             ));
         }
 

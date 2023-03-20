@@ -42,7 +42,7 @@ class ConditionalAvailabilityEventResourceQueryContainerPlugin extends AbstractP
     }
 
     /**
-     * @param int[] $ids
+     * @param array<int> $ids
      *
      * @return \Propel\Runtime\ActiveQuery\ModelCriteria|null
      */

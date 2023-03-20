@@ -10,7 +10,7 @@ use Spryker\Client\Kernel\AbstractClient;
 class ConditionalAvailabilityPageSearchClient extends AbstractClient implements ConditionalAvailabilityPageSearchClientInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
